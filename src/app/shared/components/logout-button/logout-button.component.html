@@ -1,0 +1,16 @@
+<button
+  (click)="logout()"
+  [disabled]="loading()"
+  class="flex cursor-pointer items-center"
+>
+  <div class="">
+    @if (loading() === AuthLoading.Logout) {
+      <span>Logging out...</span>
+    } @else {
+      <div class="flex items-center gap-1">
+        <ng-icon [svg]="logoutIcon" size="24" />
+        <span>Log out</span>
+      </div>
+    }
+  </div>
+</button>

@@ -1,0 +1,28 @@
+<form
+  [formGroup]="registrationForm"
+  (ngSubmit)="onSubmit()"
+  class="flex h-full w-full flex-col gap-2 rounded-sm bg-white/90 p-2 backdrop-blur-sm"
+>
+  <app-input
+    label="Learner Reference Number"
+    id="learnerReferenceNo"
+    type="text"
+    placeholder="e.g. 123456789012"
+    [required]="true"
+    formControlName="learnerReferenceNo"
+  />
+  <app-input
+    label="School Year"
+    id="schoolYear"
+    type="text"
+    placeholder="e.g. 2025-2026"
+    [required]="true"
+    formControlName="schoolYear"
+  />
+  <button type="submit">Submit</button>
+</form>
+
+<pre
+  class="h-full w-full overflow-auto rounded-sm bg-white/90 p-2 backdrop-blur-sm"
+  >{{ registrationForm.value | json }}</pre
+>

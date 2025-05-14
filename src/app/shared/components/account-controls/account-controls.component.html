@@ -1,0 +1,16 @@
+<div class="flex w-52 flex-col gap-2 rounded-sm bg-white p-4 text-black">
+  <p>{{ user()?.email }}</p>
+
+  @if (activeRole()) {
+    <app-role-switch />
+
+    <a
+      class="flex cursor-pointer items-center gap-1"
+      routerLink="/{{ activeRole() }}/settings"
+    >
+      <ng-icon [svg]="accountSettingsIcon" size="24" />
+      <span>Account Settings</span>
+    </a>
+  }
+  <app-logout-button />
+</div>

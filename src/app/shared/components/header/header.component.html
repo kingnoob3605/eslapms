@@ -1,0 +1,97 @@
+<header class="bg-primary flex justify-between p-2 text-white drop-shadow-md">
+  <div class="flex items-center gap-4 select-none">
+    @if (
+      isAuthenticated() &&
+      !["/info", "/role", "/registration"].includes(router.url)
+    ) {
+      <ng-icon
+        [svg]="sidebarIcon"
+        size="24"
+        class="cursor-pointer"
+        (click)="toggleSidebar()"
+      />
+    }
+    <p class="hidden text-lg font-bold md:block">
+      STA. MARIA CENTRAL SCHOOL - ESLAPMS
+    </p>
+    <p class="block text-lg font-bold md:hidden">SMCS - ESLAPMS</p>
+  </div>
+
+  <div class="flex items-center gap-4">
+    @if (!hasActiveRole() && isAuthenticated()) {
+      <a
+        routerLink="role"
+        routerLinkActive="underline underline-offset-4"
+        class="flex items-center"
+      >
+        <span class="hidden md:block">Select Role</span>
+        <span class="flex items-center md:hidden">
+          <ng-icon [svg]="infoIcon" size="24" />
+        </span>
+      </a>
+    }
+    <a
+      routerLink="registration"
+      routerLinkActive="underline underline-offset-4"
+      class="flex items-center"
+    >
+      <span class="hidden md:block">Registration</span>
+      <span class="flex items-center md:hidden">
+        <ng-icon [svg]="registerIcon" size="24" />
+      </span>
+    </a>
+    <a
+      routerLink="info"
+      routerLinkActive="underline underline-offset-4"
+      class="flex items-center"
+    >
+      <span class="hidden md:block">Info</span>
+      <span class="flex items-center md:hidden">
+        <ng-icon [svg]="newsIcon" size="24" />
+      </span>
+    </a>
+    @if (isAuthenticated() && role()) {
+      <a
+        [routerLink]="role()?.name"
+        routerLinkActive="underline underline-offset-4"
+        class="flex items-center"
+      >
+        <span class="hidden md:block"
+          >{{ role()?.name | titlecase }} Dashboard</span
+        >
+
+        <span class="flex items-center md:hidden">
+          <ng-icon [svg]="dashboardIcon" size="24" />
+        </span>
+      </a>
+    }
+
+    @if (isAuthenticated()) {
+      <div
+        class="relative flex items-center gap-2"
+        [appOutsideClickEnabled]="accountControlsState().isShown"
+        appOutsideClick
+        (appOutsideClick)="hideAccountControls()"
+      >
+        <button
+          class="flex cursor-pointer items-center gap-2"
+          (click)="toggleAccountControls()"
+        >
+          <span class="hidden md:block">{{ user()?.name | titlecase }}</span>
+          <ng-icon [svg]="accountIcon" size="24" />
+        </button>
+        <app-account-controls
+          class="absolute top-10 right-0 transform transition-all duration-300 ease-in-out"
+          [ngClass]="{
+            'translate-x-54': !accountControlsState().isShown,
+            'translate-x-0': accountControlsState().isShown,
+          }"
+        />
+      </div>
+    } @else {
+      <a routerLink="auth" routerLinkActive="underline underline-offset-4"
+        >Login</a
+      >
+    }
+  </div>
+</header>

@@ -1,0 +1,22 @@
+<div class="w-52 rounded-lg bg-white/90 p-4">
+  <p>Hello, {{ user()?.name | titlecase }}</p>
+  @if (loading() === AuthLoading.RoleSwitch) {
+    <p class="text-sm">Activating {{ selectedRole() | titlecase }}...</p>
+  } @else {
+    <p class="text-sm">Pls select a role to continue</p>
+  }
+  @if (roles()) {
+    <div class="flex flex-col gap-2">
+      @for (role of roles(); track role.id) {
+        <button
+          (click)="selectRole(role)"
+          [disabled]="loading()"
+          class="bg-primary flex w-full cursor-pointer items-center justify-between gap-2 rounded-sm px-2 py-1 text-white"
+        >
+          <span>{{ role.name | titlecase }}</span>
+          <ng-icon [svg]="loginIcon" size="24" />
+        </button>
+      }
+    </div>
+  }
+</div>

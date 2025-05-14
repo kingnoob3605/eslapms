@@ -1,0 +1,30 @@
+<button
+  class="hover:bg-primary flex w-full cursor-pointer items-center gap-2 p-1 transition-all duration-200 ease-in-out hover:text-white"
+  [ngClass]="{
+    'opacity-0': sidebarStatus() === SidebarStatus.hidden,
+    'opacity-100': sidebarStatus() === SidebarStatus.expanded,
+  }"
+  [routerLink]="routerLink"
+  routerLinkActive="bg-primary text-white"
+>
+  <div
+    class="bg-primary flex items-center rounded-sm p-1 text-white"
+    [ngClass]="{
+      'opacity-0': sidebarStatus() === SidebarStatus.hidden,
+      'opacity-100':
+        sidebarStatus() === SidebarStatus.expanded || SidebarStatus.collapsed,
+    }"
+  >
+    <ng-icon [svg]="icon" size="24" />
+  </div>
+  <span
+    class="transition duration-200 ease-in-out"
+    [ngClass]="{
+      'opacity-0':
+        sidebarStatus() === SidebarStatus.collapsed || SidebarStatus.hidden,
+      'opacity-100': sidebarStatus() === SidebarStatus.expanded,
+    }"
+  >
+    {{ title }}
+  </span>
+</button>

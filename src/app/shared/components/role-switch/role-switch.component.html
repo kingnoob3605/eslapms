@@ -1,0 +1,23 @@
+@if (roles()) {
+  @if (roles().length > 1) {
+    @if (roleLoading() === AuthLoading.RoleSwitch) {
+      <p class="text-sm">Switching to {{ selectedRole() | titlecase }}...</p>
+    } @else {
+      <p class="text-sm">Switch Role</p>
+    }
+  } @else {
+    <p class="text-sm">Your Role</p>
+  }
+  <div class="flex flex-col gap-2">
+    @for (role of roles(); track role.id) {
+      <button
+        (click)="selectRole(role)"
+        [disabled]="role.is_active"
+        class="bg-primary flex w-full cursor-pointer items-center justify-between gap-4 rounded-sm px-2 py-1 text-white"
+      >
+        <span>{{ role.name | titlecase }}</span>
+        <ng-icon [svg]="role.is_active ? userIcon : changeIcon" size="24" />
+      </button>
+    }
+  </div>
+}

@@ -1,0 +1,19 @@
+<label [for]="id" class="flex flex-col">
+  <span class="text-sm">{{ label }}</span>
+  <input
+    [id]="id"
+    [type]="type"
+    [placeholder]="placeholder"
+    [required]="required"
+    [value]="value"
+    (input)="onInputChange($event)"
+    (blur)="onInputBlur()"
+    class="rounded-sm border border-black px-2 py-1"
+  />
+  <div
+    *ngIf="control?.invalid && control?.touched"
+    class="mt-1 text-sm text-red-500"
+  >
+    <p>Please enter a correct email.</p>
+  </div>
+</label>

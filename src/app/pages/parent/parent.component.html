@@ -1,0 +1,20 @@
+<app-sidebar>
+  <div class="absolute w-50">
+    <app-sidebar-item
+      [icon]="homeIcon"
+      title="Dashboard"
+      routerLink="dashboard"
+    />
+    <app-sidebar-item
+      [icon]="studentIcon"
+      title="Students"
+      routerLink="students"
+    />
+    <app-sidebar-item
+      [icon]="settingsIcon"
+      title="Settings"
+      routerLink="settings"
+    />
+  </div>
+</app-sidebar>
+<router-outlet />
