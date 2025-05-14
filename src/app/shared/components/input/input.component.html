@@ -1,19 +1,28 @@
-<label [for]="id" class="flex flex-col">
-  <span class="text-sm">{{ label }}</span>
+<label class="flex w-full flex-col">
+  <p class="text-sm">{{ label }}</p>
   <input
-    [id]="id"
     [type]="type"
     [placeholder]="placeholder"
     [required]="required"
     [value]="value"
     (input)="onInputChange($event)"
     (blur)="onInputBlur()"
-    class="rounded-sm border border-black px-2 py-1"
+    class="w-full rounded-sm border-1 px-2 py-1 text-base placeholder-black/50 focus:border-1"
   />
-  <div
-    *ngIf="control?.invalid && control?.touched"
-    class="mt-1 text-sm text-red-500"
-  >
-    <p>Please enter a correct email.</p>
-  </div>
+  @if (control?.invalid && control?.touched) {
+    @let errors = control!.errors;
+
+    @if (errors?.["required"]) {
+      <p class="text-sm text-red-500">{{ label }} is required.</p>
+    } @else if (errors?.["email"]) {
+      <p class="text-sm text-red-500">Please enter a valid email address.</p>
+    } @else if (errors?.["minlength"]) {
+      <p class="text-sm text-red-500">
+        {{ label }} must be at least
+        {{ errors!["minlength"].requiredLength }} characters.
+      </p>
+    } @else {
+      <p class="text-sm text-red-500">Please enter a valid {{ label }}.</p>
+    }
+  }
 </label>

@@ -9,4 +9,11 @@ export const authRoutes: Routes = [
         (component) => component.LoginFormComponent,
       ),
   },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./components/register-form/register-form.component').then(
+        (component) => component.RegisterFormComponent,
+      ),
+  },
 ];

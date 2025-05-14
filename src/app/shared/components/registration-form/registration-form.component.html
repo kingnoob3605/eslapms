@@ -1,11 +1,10 @@
 <form
   [formGroup]="registrationForm"
   (ngSubmit)="onSubmit()"
-  class="flex h-full w-full flex-col gap-2 rounded-sm bg-white/90 p-2 backdrop-blur-sm"
+  class="flex h-full flex-col gap-2 rounded-sm bg-white/90 p-2 backdrop-blur-sm"
 >
   <app-input
     label="Learner Reference Number"
-    id="learnerReferenceNo"
     type="text"
     placeholder="e.g. 123456789012"
     [required]="true"
@@ -13,16 +12,44 @@
   />
   <app-input
     label="School Year"
-    id="schoolYear"
     type="text"
     placeholder="e.g. 2025-2026"
     [required]="true"
     formControlName="schoolYear"
   />
-  <button type="submit">Submit</button>
+  <div formGroupName="personalInfo">
+    <app-input
+      label="PSA Birth Certificate Number"
+      type="text"
+      placeholder="e.g. 123456789"
+      [required]="true"
+      formControlName="psaBirthCertificateNo"
+    />
+    <app-input
+      label="Firstname"
+      type="text"
+      placeholder="e.g. Juan"
+      [required]="true"
+      formControlName="firstName"
+    />
+    <app-input
+      label="Lastname"
+      type="text"
+      placeholder="e.g. Dela Cruz"
+      [required]="true"
+      formControlName="lastName"
+    />
+    <app-input
+      label="Middlename"
+      type="text"
+      placeholder="e.g. Reyes"
+      [required]="true"
+      formControlName="middleName"
+    />
+  </div>
+  <app-button type="submit">Submit</app-button>
 </form>
 
-<pre
-  class="h-full w-full overflow-auto rounded-sm bg-white/90 p-2 backdrop-blur-sm"
-  >{{ registrationForm.value | json }}</pre
->
+<div class="overflow-auto rounded-sm bg-white/90 p-2 backdrop-blur-sm">
+  <pre>{{ registrationForm.value | json }}</pre>
+</div>

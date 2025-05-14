@@ -9,7 +9,7 @@ import {
 
 @Component({
   selector: 'app-input',
-  imports: [NgIf],
+  imports: [],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
   providers: [
@@ -24,14 +24,14 @@ import {
 export class InputComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() type: string = 'text';
-  @Input() id: string = 'text';
   @Input() placeholder: string = 'text';
   @Input() required: boolean = false;
+  @Input() formControlName: string = '';
 
   private controlContainer = inject(ControlContainer);
 
   get control() {
-    return this.controlContainer.control?.get(this.id);
+    return this.controlContainer.control?.get(this.formControlName);
   }
 
   value: string = '';
@@ -58,7 +58,6 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   onInputChange(event: Event) {
-    console.log(event);
     const input = event.target as HTMLInputElement;
     this.value = input.value;
     this.onChanged(this.value);

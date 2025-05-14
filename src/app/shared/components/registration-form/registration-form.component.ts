@@ -7,10 +7,11 @@ import {
 import { buildRegistrationForm } from './registration-form.builder';
 import { InputComponent } from '../input/input.component';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-registration-form',
-  imports: [ReactiveFormsModule, InputComponent, CommonModule],
+  imports: [ReactiveFormsModule, InputComponent, CommonModule, ButtonComponent],
   templateUrl: './registration-form.component.html',
   styleUrl: './registration-form.component.css',
 })

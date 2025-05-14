@@ -6,6 +6,29 @@ export const login = createAction(
   props<{ credentials: { email: string; password: string } }>(),
 );
 
+export const register = createAction(
+  '[Auth] register',
+  props<{
+    data: {
+      name: string;
+      email: string;
+      password: string;
+      password_confirmation: string;
+      roles: number[];
+    };
+  }>(),
+);
+
+export const registerSuccess = createAction(
+  '[Auth] register success',
+  props<{ message: string }>(),
+);
+
+export const registerFailure = createAction(
+  '[Auth] register failure',
+  props<{ error: string }>(),
+);
+
 export const loginSuccess = createAction(
   '[Auth] login success',
   props<{ user: User }>(),

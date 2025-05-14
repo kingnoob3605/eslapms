@@ -1,0 +1,68 @@
+<form
+  class="flex w-3xs flex-col items-start gap-2"
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit()"
+>
+  <app-input
+    label="Name"
+    type="text"
+    placeholder="e.g. Juan"
+    [required]="true"
+    formControlName="name"
+    class="w-full"
+  />
+  <app-input
+    label="Email"
+    type="email"
+    placeholder="e.g. example@email.com"
+    [required]="true"
+    formControlName="email"
+    class="w-full"
+  />
+
+  <app-input
+    label="Password"
+    type="password"
+    placeholder="e.g. password"
+    [required]="true"
+    formControlName="password"
+    class="w-full"
+  />
+  <app-input
+    label="Password Confirmation"
+    type="password"
+    placeholder="e.g. password"
+    [required]="true"
+    formControlName="password_confirmation"
+    class="w-full"
+  />
+
+  <p>Pick role/roles</p>
+  <div formGroupName="roles" class="flex items-center gap-4">
+    <label *ngFor="let role of rolesList">
+      <input
+        type="checkbox"
+        [value]="role.id"
+        (change)="onRoleChange($event)"
+      />
+      {{ role.name }}
+    </label>
+  </div>
+
+  <app-button type="submit" [disabled]="!registerForm.valid || isLoading">
+    @if (loading()) {
+      <span>Registering...</span>
+    } @else {
+      <span>Register</span>
+    }
+  </app-button>
+
+  @if (error()) {
+    <p>{{ error() }}</p>
+  }
+
+  @if (success() === AuthSuccess.Register) {
+    <p>Register successful proceed to login</p>
+  }
+</form>
+<!-- <pre>{{ registerForm.value | json }}</pre> -->

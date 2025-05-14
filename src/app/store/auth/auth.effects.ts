@@ -13,6 +13,9 @@ import {
   selectRoleSuccess,
   selectRoleFailure,
   logoutSuccess,
+  register,
+  registerSuccess,
+  registerFailure,
 } from './auth.actions';
 import {
   catchError,
@@ -44,6 +47,21 @@ export class AuthEffects {
           map((user) => loginSuccess({ user: user })),
           catchError((error) => {
             return of(loginFailure({ error: error }));
+          }),
+        ),
+      ),
+    );
+  });
+
+  // register effect
+  register$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(register),
+      exhaustMap((action) =>
+        this.authService.register(action.data).pipe(
+          map(() => registerSuccess({ message: 'Register Success' })),
+          catchError((error) => {
+            return of(registerFailure({ error: error }));
           }),
         ),
       ),

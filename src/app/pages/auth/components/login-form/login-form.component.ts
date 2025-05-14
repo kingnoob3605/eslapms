@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -13,10 +13,11 @@ import {
 } from '../../../../store/auth/auth.selector';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from '../../../../shared/components/input/input.component';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-login-form',
-  imports: [ReactiveFormsModule, CommonModule, InputComponent],
+  imports: [ReactiveFormsModule, CommonModule, InputComponent, ButtonComponent],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css',
 })
@@ -26,6 +27,10 @@ export class LoginFormComponent {
   error = this.store.selectSignal(selectAuthError);
   loading = this.store.selectSignal(selectAuthLoading);
 
+  get isLoading() {
+    return this.loading() ? true : false;
+  }
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -33,14 +38,6 @@ export class LoginFormComponent {
       Validators.minLength(8),
     ]),
   });
-
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
 
   onSubmit() {
     if (this.loginForm.valid) {

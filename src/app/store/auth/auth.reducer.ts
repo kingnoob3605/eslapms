@@ -1,5 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
-import { AuthLoading, AuthState, initialAuthState } from './auth.state';
+import {
+  AuthLoading,
+  AuthState,
+  AuthSuccess,
+  initialAuthState,
+} from './auth.state';
 import * as AuthActions from './auth.actions';
 
 export const authReducer = createReducer(
@@ -11,12 +16,26 @@ export const authReducer = createReducer(
     error: null,
   })),
 
+  on(AuthActions.register, (state) => ({
+    ...state,
+    loading: AuthLoading.Register,
+    error: null,
+  })),
+
   on(AuthActions.loginSuccess, (state, { user }) => ({
     ...state,
     isAuthenticated: true,
     user: user,
     loading: null,
     error: null,
+    success: AuthSuccess.Login,
+  })),
+
+  on(AuthActions.registerSuccess, (state) => ({
+    ...state,
+    loading: null,
+    error: null,
+    success: AuthSuccess.Register,
   })),
 
   on(AuthActions.authenticated, (state, { user }) => ({
@@ -36,6 +55,14 @@ export const authReducer = createReducer(
   })),
 
   on(AuthActions.loginFailure, (state, { error }) => ({
+    ...state,
+    isAuthenticated: false,
+    user: null,
+    loading: null,
+    error: error,
+  })),
+
+  on(AuthActions.registerFailure, (state, { error }) => ({
     ...state,
     isAuthenticated: false,
     user: null,
