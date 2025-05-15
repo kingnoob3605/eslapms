@@ -1,9 +1,7 @@
 <button
   class="sidebar-item"
   [ngClass]="{
-    active:
-      sidebarStatus() === SidebarStatus.expanded &&
-      router.url.includes(routerLink),
+    active: router.url.includes(routerLink),
     collapsed: sidebarStatus() === SidebarStatus.collapsed,
     hidden: sidebarStatus() === SidebarStatus.hidden,
   }"

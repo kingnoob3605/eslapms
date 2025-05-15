@@ -1,9 +1,9 @@
 <div
-  class="absolute h-full overflow-x-hidden bg-white/90 backdrop-blur-xs transition-all duration-300 ease-in-out md:relative"
+  class="sidebar-container"
   [ngClass]="{
-    'w-48': sidebarStatus() === SidebarStatus.expanded,
-    'w-10': sidebarStatus() === SidebarStatus.collapsed,
-    'w-0': sidebarStatus() === SidebarStatus.hidden,
+    'sidebar-expanded': sidebarStatus() === SidebarStatus.expanded,
+    'sidebar-collapsed': sidebarStatus() === SidebarStatus.collapsed,
+    'sidebar-hidden': sidebarStatus() === SidebarStatus.hidden,
   }"
   [appOutsideClickEnabled]="
     isHandset() && sidebarStatus() === SidebarStatus.expanded
@@ -11,5 +11,7 @@
   appOutsideClick
   (appOutsideClick)="hideSidebar()"
 >
-  <ng-content></ng-content>
+  <div class="sidebar-content">
+    <ng-content></ng-content>
+  </div>
 </div>
