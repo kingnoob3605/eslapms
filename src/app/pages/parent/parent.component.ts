@@ -19,6 +19,9 @@ import { filter } from 'rxjs/operators';
   imports: [SidebarComponent, SidebarItemComponent, RouterOutlet, CommonModule],
   templateUrl: './parent.component.html',
   styleUrl: './parent.component.css',
+  host: {
+    class: 'flex w-full',
+  },
 })
 export class ParentComponent implements OnInit {
   // Icons for sidebar navigation

@@ -23,6 +23,9 @@ import { filter } from 'rxjs/operators';
   imports: [SidebarComponent, SidebarItemComponent, RouterOutlet, CommonModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
+  host: {
+    class: 'flex w-full', // Add this line - this makes the component take up the full width
+  },
 })
 export class AdminComponent implements OnInit {
   homeIcon = matHomeRound;
