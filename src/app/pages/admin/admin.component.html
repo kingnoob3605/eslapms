@@ -1,51 +1,68 @@
-<app-sidebar>
-  <div class="absolute w-50">
-    <app-sidebar-item
-      [icon]="homeIcon"
-      title="Dashboard"
-      routerLink="dashboard"
-    />
-    <app-sidebar-item
-      [icon]="personAddIcon"
-      title="Registrations"
-      routerLink="registrations"
-    />
-    <app-sidebar-item
-      [icon]="studentIcon"
-      title="Students"
-      routerLink="students"
-    />
-    <app-sidebar-item
-      [icon]="subjectsIcon"
-      title="Subjects"
-      routerLink="subjects"
-    />
-    <app-sidebar-item
-      [icon]="sectionIcon"
-      title="Sections"
-      routerLink="sections"
-    />
-    <app-sidebar-item [icon]="levelsIcon" title="Levels" routerLink="levels" />
-    <app-sidebar-item
-      [icon]="schoolYearIcon"
-      title="School-Year"
-      routerLink="school-year"
-    />
-    <app-sidebar-item
-      [icon]="teacherIcon"
-      title="Teachers"
-      routerLink="teachers"
-    />
-    <app-sidebar-item
-      [icon]="parentIcon"
-      title="Parents"
-      routerLink="parents"
-    />
-    <app-sidebar-item
-      [icon]="settingsIcon"
-      title="Settings"
-      routerLink="settings"
-    />
+<div class="admin-container">
+  <!-- Background image and overlay -->
+  <div class="bg-image"></div>
+  <div class="bg-overlay"></div>
+  <div class="wave-decoration"></div>
+
+  <!-- Sidebar navigation -->
+  <app-sidebar>
+    <div class="sidebar-content">
+      <app-sidebar-item
+        [icon]="homeIcon"
+        title="Dashboard"
+        routerLink="dashboard"
+      />
+      <app-sidebar-item
+        [icon]="personAddIcon"
+        title="Registrations"
+        routerLink="registrations"
+      />
+      <app-sidebar-item
+        [icon]="studentIcon"
+        title="Students"
+        routerLink="students"
+      />
+      <app-sidebar-item
+        [icon]="subjectsIcon"
+        title="Subjects"
+        routerLink="subjects"
+      />
+      <app-sidebar-item
+        [icon]="sectionIcon"
+        title="Sections"
+        routerLink="sections"
+      />
+      <app-sidebar-item
+        [icon]="levelsIcon"
+        title="Levels"
+        routerLink="levels"
+      />
+      <app-sidebar-item
+        [icon]="schoolYearIcon"
+        title="School-Year"
+        routerLink="school-year"
+      />
+      <app-sidebar-item
+        [icon]="teacherIcon"
+        title="Teachers"
+        routerLink="teachers"
+      />
+      <app-sidebar-item
+        [icon]="parentIcon"
+        title="Parents"
+        routerLink="parents"
+      />
+      <app-sidebar-item
+        [icon]="settingsIcon"
+        title="Settings"
+        routerLink="settings"
+      />
+    </div>
+  </app-sidebar>
+
+  <div class="main-content">
+    <div class="white-container">
+      <router-outlet />
+    </div>
   </div>
-</app-sidebar>
-<router-outlet />
+</div>

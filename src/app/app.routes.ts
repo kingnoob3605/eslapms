@@ -1,14 +1,11 @@
 import { Routes } from '@angular/router';
-import { AdminComponent } from './pages/admin/admin.component';
-import { TeacherComponent } from './pages/teacher/teacher.component';
-import { ParentComponent } from './pages/parent/parent.component';
 import { authGuard } from './core/guards/auth.guard';
 import { unauthGuard } from './core/guards/unauth.guard';
-import { RoleComponent } from './pages/role/role.component';
 import { roleGuard } from './core/guards/role.guard';
 import { noroleGuard } from './core/guards/norole.guard';
 import { InfoComponent } from './pages/info/info.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { RoleComponent } from './pages/role/role.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'info', pathMatch: 'full' },
@@ -34,7 +31,7 @@ export const routes: Routes = [
         (component) => component.AdminComponent,
       ),
     loadChildren: () =>
-      import('./pages/admin/admin.routes').then((route) => route.authRoutes),
+      import('./pages/admin/admin.routes').then((route) => route.adminRoutes),
   },
   {
     path: 'teacher',
