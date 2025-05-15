@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const authRoutes: Routes = [
+export const adminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',

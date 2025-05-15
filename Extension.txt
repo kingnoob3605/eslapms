@@ -1,0 +1,1 @@
+npm install @ng-icons/core @ng-icons/material-icons
