@@ -1,80 +1,147 @@
-/* Stats container with proper flex layout */
-.stats-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  justify-content: space-between;
+/* Main container */
+.dashboard-container {
+  width: 100%;
+  height: 100%;
 }
 
-/* Individual stat card styling */
+/* Dashboard header */
+.dashboard-header {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-header p {
+  color: #7f8c8d;
+}
+
+/* Stats grid container */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Stat card styling with proper colors */
 .stat-card {
-  flex: 1;
-  min-width: 200px;
-  display: flex;
-  align-items: center;
-  padding: 1rem;
+  background-color: white;
   border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
 }
 
 .stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Stat icon container */
-.stat-icon-container {
-  width: 50px;
-  height: 50px;
+.stat-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-right: 1rem;
 }
 
-/* Stat text container */
-.stat-text {
-  display: flex;
-  flex-direction: column;
+.stat-content {
+  flex: 1;
 }
 
-/* Dashboard section styling */
+.stat-count {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.stat-title {
+  font-size: 0.875rem;
+  color: #7f8c8d;
+}
+
+/* Blue stat card */
+.stat-blue .stat-icon {
+  background-color: #e3f2fd;
+  color: #2196f3;
+}
+
+.stat-blue .stat-count {
+  color: #2196f3;
+}
+
+/* Green stat card */
+.stat-green .stat-icon {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+
+.stat-green .stat-count {
+  color: #4caf50;
+}
+
+/* Purple stat card */
+.stat-purple .stat-icon {
+  background-color: #f3e5f5;
+  color: #9c27b0;
+}
+
+.stat-purple .stat-count {
+  color: #9c27b0;
+}
+
+/* Orange stat card */
+.stat-orange .stat-icon {
+  background-color: #fff3e0;
+  color: #ff9800;
+}
+
+.stat-orange .stat-count {
+  color: #ff9800;
+}
+
+/* Dashboard sections */
 .dashboard-section {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: white;
   border-radius: 0.5rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Section title styling */
 .section-title {
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 1rem;
   color: #2c3e50;
+  margin-bottom: 1rem;
 }
 
 /* Quick actions grid */
-.quick-actions-grid {
+.actions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 1rem;
 }
 
-/* Action card styling */
+/* Action card */
 .action-card {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: #f8f9fa;
   border-radius: 0.5rem;
   padding: 1rem;
   text-align: center;
-  cursor: pointer;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .action-card:hover {
@@ -82,61 +149,131 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Attendance overview styling */
+.action-card h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0.5rem 0;
+  color: #2c3e50;
+}
+
+.action-card p {
+  font-size: 0.75rem;
+  color: #7f8c8d;
+}
+
+/* Attendance overview */
 .attendance-overview {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .attendance-stat {
   flex: 1;
-  min-width: 120px;
+  min-width: 100px;
   padding: 1rem;
-  border-radius: 0.5rem;
   text-align: center;
+  border-radius: 0.5rem;
 }
 
 .attendance-stat h3 {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  color: #7f8c8d;
   margin-bottom: 0.5rem;
 }
 
 .attendance-stat p {
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 1.75rem;
+  font-weight: 700;
 }
 
-/* Activity list styling */
+/* Activities list */
 .activities-list {
   max-height: 350px;
   overflow-y: auto;
-  scrollbar-width: thin;
 }
 
 .activity-item {
   padding: 0.75rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #eee;
   transition: background-color 0.2s ease;
+}
+
+.activity-item:hover {
+  background-color: #f8f9fa;
 }
 
 .activity-item:last-child {
   border-bottom: none;
 }
 
-.activity-item:hover {
-  background-color: rgba(0, 0, 0, 0.03);
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
 }
 
-/* Badge styling */
+.activity-title {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.activity-time {
+  font-size: 0.75rem;
+  color: #95a5a6;
+}
+
+.activity-description {
+  font-size: 0.875rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+/* Badge styles */
 .badge {
   display: inline-block;
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 500;
-  margin-top: 0.5rem;
+}
+
+.badge-enrollment {
+  background-color: #e3f2fd;
+  color: #2196f3;
+}
+
+.badge-attendance {
+  background-color: #f3e5f5;
+  color: #9c27b0;
+}
+
+.badge-health {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+
+.badge-system {
+  background-color: #f5f5f5;
+  color: #607d8b;
+}
+
+/* View all button */
+.view-all-button {
+  display: block;
+  margin: 1rem auto 0;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: none;
+  color: #2c3e50;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.view-all-button:hover {
+  color: #e91e63;
+  text-decoration: underline;
 }
 
 /* Custom scrollbar */
@@ -154,30 +291,27 @@
 }
 
 .activities-list::-webkit-scrollbar-thumb:hover {
-  background: #999;
+  background: #95a5a6;
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
-  .stats-container {
-    flex-wrap: wrap;
-  }
-
-  .stat-card {
-    min-width: 45%;
-  }
-
-  .quick-actions-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
-}
-
 @media (max-width: 768px) {
-  .stat-card {
-    min-width: 100%;
+  .stats-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .actions-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
   .attendance-overview {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-container {
+    grid-template-columns: 1fr;
   }
 }

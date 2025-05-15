@@ -16,8 +16,7 @@ interface StatCard {
   title: string;
   count: number;
   icon: any;
-  bgColor: string;
-  textColor: string;
+  class: string;
 }
 
 // This interface will define our activity data structure
@@ -52,29 +51,25 @@ export class AdminDashboardComponent implements OnInit {
       title: 'Total Students',
       count: 523,
       icon: this.studentIcon,
-      bgColor: 'bg-blue-100',
-      textColor: 'text-blue-800',
+      class: 'stat-blue',
     },
     {
       title: 'Total Teachers',
       count: 32,
       icon: this.teachersIcon,
-      bgColor: 'bg-green-100',
-      textColor: 'text-green-800',
+      class: 'stat-green',
     },
     {
       title: 'Attendance Today',
       count: 498,
       icon: this.attendanceIcon,
-      bgColor: 'bg-purple-100',
-      textColor: 'text-purple-800',
+      class: 'stat-purple',
     },
     {
       title: 'Total Parents',
       count: 402,
       icon: this.peopleIcon,
-      bgColor: 'bg-orange-100',
-      textColor: 'text-orange-800',
+      class: 'stat-orange',
     },
   ];
 

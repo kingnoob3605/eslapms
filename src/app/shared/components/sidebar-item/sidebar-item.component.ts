@@ -24,4 +24,9 @@ export class SidebarItemComponent {
   @Input() title: string = '';
   @Input() color: string = '';
   @Input() routerLink: string = '';
+
+  // Check if the current route matches this sidebar item
+  get isActive(): boolean {
+    return this.router.url.includes(this.routerLink);
+  }
 }
