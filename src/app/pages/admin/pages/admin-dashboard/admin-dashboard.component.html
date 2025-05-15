@@ -1,47 +1,41 @@
-<div>
+<div class="dashboard-container">
   <!-- Dashboard Header -->
-  <div class="mb-6">
-    <h1 class="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
-    <p class="text-gray-600">Welcome to Sta. Maria Central School - ESLAPMS</p>
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome to Sta. Maria Central School - ESLAPMS</p>
   </div>
 
   <!-- Statistics Cards -->
   <div class="stats-container">
     @for (stat of stats; track stat.title) {
-      <div [ngClass]="['stat-card', stat.bgColor]">
-        <div class="stat-icon-container">
-          <ng-icon
-            [svg]="stat.icon"
-            size="24"
-            [ngClass]="stat.textColor"
-          ></ng-icon>
+      <div class="stat-card" [ngClass]="stat.class">
+        <div class="stat-icon">
+          <ng-icon [svg]="stat.icon" size="24"></ng-icon>
         </div>
-        <div class="stat-text">
-          <h3 [ngClass]="stat.textColor" class="text-xl font-bold">
-            {{ stat.count }}
-          </h3>
-          <p class="text-sm text-gray-700">{{ stat.title }}</p>
+        <div class="stat-content">
+          <div class="stat-count">{{ stat.count }}</div>
+          <div class="stat-title">{{ stat.title }}</div>
         </div>
       </div>
     }
   </div>
 
   <!-- Main Dashboard Content -->
-  <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
     <!-- Quick Actions Section -->
     <div class="lg:col-span-2">
       <div class="dashboard-section">
         <h2 class="section-title">Quick Actions</h2>
-        <div class="quick-actions-grid">
+        <div class="actions-grid">
           <!-- Student Management -->
           <div (click)="navigateTo('/admin/students')" class="action-card">
             <ng-icon
               [svg]="studentIcon"
               size="32"
-              class="mb-2 text-blue-600"
+              class="text-blue-600"
             ></ng-icon>
-            <h3 class="font-medium">Students</h3>
-            <p class="text-xs text-gray-600">Manage student records</p>
+            <h3>Students</h3>
+            <p>Manage student records</p>
           </div>
 
           <!-- Teacher Management -->
@@ -49,10 +43,10 @@
             <ng-icon
               [svg]="teachersIcon"
               size="32"
-              class="mb-2 text-green-600"
+              class="text-green-600"
             ></ng-icon>
-            <h3 class="font-medium">Teachers</h3>
-            <p class="text-xs text-gray-600">Manage teacher accounts</p>
+            <h3>Teachers</h3>
+            <p>Manage teacher accounts</p>
           </div>
 
           <!-- Attendance -->
@@ -60,10 +54,10 @@
             <ng-icon
               [svg]="attendanceIcon"
               size="32"
-              class="mb-2 text-purple-600"
+              class="text-purple-600"
             ></ng-icon>
-            <h3 class="font-medium">Attendance</h3>
-            <p class="text-xs text-gray-600">View & update attendance</p>
+            <h3>Attendance</h3>
+            <p>View & update attendance</p>
           </div>
 
           <!-- Health Records -->
@@ -71,10 +65,10 @@
             <ng-icon
               [svg]="calendarIcon"
               size="32"
-              class="mb-2 text-red-600"
+              class="text-red-600"
             ></ng-icon>
-            <h3 class="font-medium">Health Records</h3>
-            <p class="text-xs text-gray-600">Manage health data</p>
+            <h3>Health Records</h3>
+            <p>Manage health data</p>
           </div>
 
           <!-- Reports -->
@@ -82,10 +76,10 @@
             <ng-icon
               [svg]="analyticsIcon"
               size="32"
-              class="mb-2 text-yellow-600"
+              class="text-yellow-600"
             ></ng-icon>
-            <h3 class="font-medium">Reports</h3>
-            <p class="text-xs text-gray-600">Generate DepEd reports</p>
+            <h3>Reports</h3>
+            <p>Generate DepEd reports</p>
           </div>
 
           <!-- Parent Portal -->
@@ -93,28 +87,28 @@
             <ng-icon
               [svg]="peopleIcon"
               size="32"
-              class="mb-2 text-orange-600"
+              class="text-orange-600"
             ></ng-icon>
-            <h3 class="font-medium">Parents</h3>
-            <p class="text-xs text-gray-600">Manage parent accounts</p>
+            <h3>Parents</h3>
+            <p>Manage parent accounts</p>
           </div>
         </div>
       </div>
 
       <!-- Attendance Overview Section -->
-      <div class="dashboard-section mt-6">
+      <div class="dashboard-section">
         <h2 class="section-title">Today's Attendance Overview</h2>
         <div class="attendance-overview">
           <div class="attendance-stat bg-green-50">
-            <h3 class="text-gray-600">Present</h3>
+            <h3>Present</h3>
             <p class="text-green-600">{{ totalPresent }}</p>
           </div>
           <div class="attendance-stat bg-red-50">
-            <h3 class="text-gray-600">Absent</h3>
+            <h3>Absent</h3>
             <p class="text-red-600">{{ totalAbsent }}</p>
           </div>
           <div class="attendance-stat bg-blue-50">
-            <h3 class="text-gray-600">Attendance Rate</h3>
+            <h3>Attendance Rate</h3>
             <p class="text-blue-600">{{ attendanceRate }}%</p>
           </div>
         </div>
@@ -129,47 +123,39 @@
           <ng-icon
             [svg]="notificationIcon"
             size="24"
-            class="text-gray-600"
+            class="text-gray-500"
           ></ng-icon>
         </div>
 
         <div class="activities-list">
           @for (activity of recentActivities; track activity.id) {
             <div class="activity-item">
-              <div class="flex justify-between">
-                <h3 class="font-medium">{{ activity.title }}</h3>
-                <span class="text-xs text-gray-500">{{ activity.time }}</span>
+              <div class="activity-header">
+                <h3 class="activity-title">{{ activity.title }}</h3>
+                <span class="activity-time">{{ activity.time }}</span>
               </div>
-              <p class="text-sm text-gray-600">{{ activity.description }}</p>
+              <p class="activity-description">{{ activity.description }}</p>
 
               <!-- Activity type badge -->
               @switch (activity.type) {
                 @case ("enrollment") {
-                  <span class="badge bg-blue-100 text-blue-800"
-                    >Enrollment</span
-                  >
+                  <span class="badge badge-enrollment">Enrollment</span>
                 }
                 @case ("attendance") {
-                  <span class="badge bg-purple-100 text-purple-800"
-                    >Attendance</span
-                  >
+                  <span class="badge badge-attendance">Attendance</span>
                 }
                 @case ("health") {
-                  <span class="badge bg-green-100 text-green-800">Health</span>
+                  <span class="badge badge-health">Health</span>
                 }
                 @case ("system") {
-                  <span class="badge bg-gray-100 text-gray-800">System</span>
+                  <span class="badge badge-system">System</span>
                 }
               }
             </div>
           }
         </div>
 
-        <div class="mt-4 text-center">
-          <button class="text-primary text-sm hover:underline">
-            View All Activities
-          </button>
-        </div>
+        <button class="view-all-button">View All Activities</button>
       </div>
     </div>
   </div>
