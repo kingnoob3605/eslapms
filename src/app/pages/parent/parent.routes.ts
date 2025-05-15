@@ -12,8 +12,29 @@ export const parentRoutes: Routes = [
   {
     path: 'students',
     loadComponent: () =>
-      import('../shared/pages/students/students.component').then(
-        (component) => component.StudentsComponent,
+      import('./pages/my-children/my-children.component').then(
+        (component) => component.MyChildrenComponent,
+      ),
+  },
+  {
+    path: 'attendance',
+    loadComponent: () =>
+      import('./pages/attendance/attendance.component').then(
+        (component) => component.AttendanceComponent,
+      ),
+  },
+  {
+    path: 'health',
+    loadComponent: () =>
+      import('./pages/health/health.component').then(
+        (component) => component.HealthComponent,
+      ),
+  },
+  {
+    path: 'messages',
+    loadComponent: () =>
+      import('./pages/messages/messages.component').then(
+        (component) => component.MessagesComponent,
       ),
   },
   {

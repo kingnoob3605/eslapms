@@ -1,20 +1,48 @@
-<app-sidebar>
-  <div class="absolute w-50">
-    <app-sidebar-item
-      [icon]="homeIcon"
-      title="Dashboard"
-      routerLink="dashboard"
-    />
-    <app-sidebar-item
-      [icon]="studentIcon"
-      title="Students"
-      routerLink="students"
-    />
-    <app-sidebar-item
-      [icon]="settingsIcon"
-      title="Settings"
-      routerLink="settings"
-    />
+<div class="parent-container">
+  <!-- Background image and overlay -->
+  <div class="bg-image"></div>
+  <div class="bg-overlay"></div>
+  <div class="wave-decoration"></div>
+
+  <!-- Sidebar navigation -->
+  <app-sidebar>
+    <div class="sidebar-content">
+      <app-sidebar-item
+        [icon]="homeIcon"
+        title="Dashboard"
+        routerLink="dashboard"
+      />
+      <app-sidebar-item
+        [icon]="studentIcon"
+        title="My Children"
+        routerLink="students"
+      />
+      <app-sidebar-item
+        [icon]="attendanceIcon"
+        title="Attendance"
+        routerLink="attendance"
+      />
+      <app-sidebar-item
+        [icon]="healthIcon"
+        title="Health Records"
+        routerLink="health"
+      />
+      <app-sidebar-item
+        [icon]="messageIcon"
+        title="Messages"
+        routerLink="messages"
+      />
+      <app-sidebar-item
+        [icon]="settingsIcon"
+        title="Settings"
+        routerLink="settings"
+      />
+    </div>
+  </app-sidebar>
+
+  <div class="main-content">
+    <div class="white-container">
+      <router-outlet />
+    </div>
   </div>
-</app-sidebar>
-<router-outlet />
+</div>

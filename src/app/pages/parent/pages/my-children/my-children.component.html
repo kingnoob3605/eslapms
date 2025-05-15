@@ -1,0 +1,162 @@
+<div class="my-children-container">
+  <h1 class="mb-2 text-2xl font-bold text-gray-800">My Children</h1>
+  <p class="mb-6 text-gray-600">View and manage your children's information</p>
+
+  <div class="children-content">
+    <!-- Children list sidebar -->
+    <div class="children-sidebar">
+      <h2 class="mb-4 text-lg font-semibold">Children</h2>
+
+      <!-- Children list -->
+      <div class="children-list">
+        @for (child of children; track child.id) {
+          <div
+            class="child-item"
+            [class.active]="selectedChild?.id === child.id"
+            (click)="selectChild(child)"
+          >
+            <div class="avatar">
+              <ng-icon [svg]="accountIcon" size="24"></ng-icon>
+            </div>
+            <div class="child-item-info">
+              <h3 class="font-medium">{{ child.name }}</h3>
+              <p class="text-sm text-gray-600">
+                Grade {{ child.grade }}-{{ child.section }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Child details section -->
+    @if (selectedChild) {
+      <div class="child-details">
+        <div class="child-details-header">
+          <div class="child-header-left">
+            <div class="large-avatar">
+              <ng-icon [svg]="accountIcon" size="40"></ng-icon>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold">{{ selectedChild.name }}</h2>
+              <p class="text-gray-600">
+                Grade {{ selectedChild.grade }}-{{ selectedChild.section }}
+              </p>
+            </div>
+          </div>
+          <div class="action-buttons">
+            <button
+              class="action-button attendance"
+              (click)="viewAttendance(selectedChild.id)"
+            >
+              <ng-icon [svg]="attendanceIcon" size="20"></ng-icon>
+              <span>Attendance</span>
+            </button>
+            <button
+              class="action-button health"
+              (click)="viewHealth(selectedChild.id)"
+            >
+              <ng-icon [svg]="healthIcon" size="20"></ng-icon>
+              <span>Health</span>
+            </button>
+            <button
+              class="action-button edit"
+              (click)="editChild(selectedChild.id)"
+            >
+              <ng-icon [svg]="editIcon" size="20"></ng-icon>
+              <span>Edit</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Child information sections -->
+        <div class="detail-sections">
+          <!-- Personal Information -->
+          <div class="detail-section">
+            <h3 class="section-title">
+              <ng-icon [svg]="accountIcon" size="20"></ng-icon>
+              <span>Personal Information</span>
+            </h3>
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">LRN</span>
+                <span class="info-value">{{ selectedChild.lrn }}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Age</span>
+                <span class="info-value"
+                  >{{ selectedChild.age }} years old</span
+                >
+              </div>
+              <div class="info-item">
+                <span class="info-label">Gender</span>
+                <span class="info-value">{{ selectedChild.gender }}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Date of Birth</span>
+                <span class="info-value">{{
+                  selectedChild.dateOfBirth | date: "mediumDate"
+                }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="detail-section">
+            <h3 class="section-title">
+              <ng-icon [svg]="schoolIcon" size="20"></ng-icon>
+              <span>School Information</span>
+            </h3>
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">Grade Level</span>
+                <span class="info-value">Grade {{ selectedChild.grade }}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Section</span>
+                <span class="info-value">{{ selectedChild.section }}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Attendance Rate</span>
+                <span class="info-value"
+                  >{{ selectedChild.attendanceRate }}%</span
+                >
+              </div>
+              <div class="info-item">
+                <span class="info-label">Health Status</span>
+                <span
+                  class="info-value"
+                  [class.status-attention]="
+                    selectedChild.healthStatus === 'Needs Attention'
+                  "
+                >
+                  {{ selectedChild.healthStatus }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="detail-section">
+            <h3 class="section-title">
+              <ng-icon [svg]="accountIcon" size="20"></ng-icon>
+              <span>Contact Information</span>
+            </h3>
+            <div class="info-grid">
+              <div class="info-item full-width">
+                <span class="info-label">Address</span>
+                <span class="info-value">{{ selectedChild.address }}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Contact Number</span>
+                <span class="info-value">{{
+                  selectedChild.contactNumber
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
