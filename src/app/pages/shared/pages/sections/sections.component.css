@@ -1,0 +1,27 @@
+.sections-container {
+  padding: 1rem;
+}
+
+.section-card {
+  transition: all 0.3s ease;
+}
+
+.section-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Button styles */
+button {
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}

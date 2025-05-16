@@ -1,1 +1,343 @@
-<p>students works!</p>
+<div class="students-container">
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Student Management</h1>
+    <p class="text-gray-600">
+      Manage student profiles, records, and information
+    </p>
+  </div>
+
+  <!-- Action Bar -->
+  <div
+    class="mb-6 flex flex-wrap items-center justify-between gap-4 rounded-lg bg-white p-4 shadow-sm"
+  >
+    <!-- Search -->
+    <div class="search-container relative min-w-[280px] flex-grow md:max-w-md">
+      <input
+        type="text"
+        placeholder="Search students..."
+        class="focus:border-primary w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 focus:outline-none"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+      />
+      <ng-icon
+        [svg]="searchIcon"
+        size="20"
+        class="absolute top-2.5 left-3 text-gray-500"
+      ></ng-icon>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-2">
+      <select
+        class="focus:border-primary rounded-lg border border-gray-300 bg-gray-50 p-2 focus:outline-none"
+        [(ngModel)]="gradeFilter"
+        (change)="applyFilters()"
+      >
+        <option value="">All Grades</option>
+        <option *ngFor="let grade of grades" [value]="grade">
+          Grade {{ grade }}
+        </option>
+      </select>
+
+      <select
+        class="focus:border-primary rounded-lg border border-gray-300 bg-gray-50 p-2 focus:outline-none"
+        [(ngModel)]="sectionFilter"
+        (change)="applyFilters()"
+      >
+        <option value="">All Sections</option>
+        <option *ngFor="let section of sections" [value]="section">
+          Section {{ section }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Action buttons -->
+    <div>
+      <button
+        class="bg-primary hover:bg-primary-dark flex items-center gap-2 rounded-lg px-4 py-2 text-white transition-colors"
+        (click)="openNewStudentModal()"
+      >
+        <ng-icon [svg]="addIcon" size="20"></ng-icon>
+        <span>Add Student</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="rounded-lg bg-blue-50 p-4 shadow-sm">
+      <h3 class="text-lg font-semibold text-blue-700">Total Students</h3>
+      <p class="text-3xl font-bold text-blue-900">
+        {{ filteredStudents.length }}
+      </p>
+    </div>
+
+    <div class="rounded-lg bg-green-50 p-4 shadow-sm">
+      <h3 class="text-lg font-semibold text-green-700">Present Today</h3>
+      <p class="text-3xl font-bold text-green-900">{{ getPresentCount() }}</p>
+    </div>
+
+    <div class="rounded-lg bg-red-50 p-4 shadow-sm">
+      <h3 class="text-lg font-semibold text-red-700">Absent Today</h3>
+      <p class="text-3xl font-bold text-red-900">{{ getAbsentCount() }}</p>
+    </div>
+
+    <div class="rounded-lg bg-purple-50 p-4 shadow-sm">
+      <h3 class="text-lg font-semibold text-purple-700">Attendance Rate</h3>
+      <p class="text-3xl font-bold text-purple-900">
+        {{ getAttendanceRate() }}%
+      </p>
+    </div>
+  </div>
+
+  <!-- View Toggle -->
+  <div class="mb-4 flex items-center gap-4">
+    <span class="text-gray-600">View:</span>
+    <div class="view-toggles flex gap-2">
+      <button
+        class="rounded-md p-2 transition-colors"
+        [ngClass]="{
+          'bg-gray-200': viewMode === 'grid',
+          'bg-gray-100 text-gray-600': viewMode !== 'grid',
+        }"
+        (click)="viewMode = 'grid'"
+      >
+        <ng-icon [svg]="gridIcon" size="20"></ng-icon>
+      </button>
+      <button
+        class="rounded-md p-2 transition-colors"
+        [ngClass]="{
+          'bg-gray-200': viewMode === 'list',
+          'bg-gray-100 text-gray-600': viewMode !== 'list',
+        }"
+        (click)="viewMode = 'list'"
+      >
+        <ng-icon [svg]="listIcon" size="20"></ng-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Students Grid View -->
+  <div
+    *ngIf="viewMode === 'grid'"
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    <div
+      *ngFor="let student of filteredStudents"
+      class="student-card rounded-lg bg-white p-4 shadow-sm transition-all hover:shadow-md"
+    >
+      <div class="mb-3 flex justify-between">
+        <div
+          class="student-avatar bg-primary flex h-14 w-14 items-center justify-center rounded-full text-xl font-bold text-white"
+        >
+          {{ getInitials(student.firstName, student.lastName) }}
+        </div>
+        <div class="flex gap-2">
+          <button
+            class="rounded-full p-1 text-blue-600 hover:bg-blue-50"
+            (click)="viewStudent(student)"
+          >
+            <ng-icon [svg]="viewIcon" size="18"></ng-icon>
+          </button>
+          <button
+            class="rounded-full p-1 text-green-600 hover:bg-green-50"
+            (click)="editStudent(student)"
+          >
+            <ng-icon [svg]="editIcon" size="18"></ng-icon>
+          </button>
+        </div>
+      </div>
+
+      <h3 class="text-lg font-semibold">
+        {{ student.firstName }} {{ student.lastName }}
+      </h3>
+      <p class="text-sm text-gray-600">LRN: {{ student.lrn }}</p>
+
+      <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+        <div>
+          <span class="text-gray-500">Grade:</span>
+          <span class="ml-1 font-medium">{{ student.grade }}</span>
+        </div>
+        <div>
+          <span class="text-gray-500">Section:</span>
+          <span class="ml-1 font-medium">{{ student.section }}</span>
+        </div>
+      </div>
+
+      <div class="mt-3 flex items-center gap-2">
+        <span
+          class="rounded-full px-2 py-0.5 text-xs font-medium"
+          [ngClass]="{
+            'bg-green-100 text-green-800': student.isPresent,
+            'bg-red-100 text-red-800': !student.isPresent,
+          }"
+        >
+          {{ student.isPresent ? "Present" : "Absent" }}
+        </span>
+
+        <span
+          class="rounded-full px-2 py-0.5 text-xs font-medium"
+          [ngClass]="{
+            'bg-blue-100 text-blue-800': student.healthStatus === 'Good',
+            'bg-yellow-100 text-yellow-800': student.healthStatus === 'Fair',
+            'bg-red-100 text-red-800':
+              student.healthStatus === 'Needs Attention',
+          }"
+        >
+          Health: {{ student.healthStatus }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Students List View -->
+  <div
+    *ngIf="viewMode === 'list'"
+    class="overflow-x-auto rounded-lg bg-white shadow-sm"
+  >
+    <table class="min-w-full table-auto">
+      <thead class="bg-gray-50">
+        <tr>
+          <th
+            class="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+          >
+            Student
+          </th>
+          <th
+            class="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+          >
+            LRN
+          </th>
+          <th
+            class="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+          >
+            Grade & Section
+          </th>
+          <th
+            class="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+          >
+            Attendance
+          </th>
+          <th
+            class="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+          >
+            Health
+          </th>
+          <th
+            class="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+          >
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <tr *ngFor="let student of filteredStudents" class="hover:bg-gray-50">
+          <td class="px-4 py-3 whitespace-nowrap">
+            <div class="flex items-center">
+              <div
+                class="bg-primary mr-3 flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white"
+              >
+                {{ getInitials(student.firstName, student.lastName) }}
+              </div>
+              <div>
+                <div class="font-medium text-gray-900">
+                  {{ student.firstName }} {{ student.lastName }}
+                </div>
+                <div class="text-sm text-gray-500">{{ student.gender }}</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-4 py-3 text-sm whitespace-nowrap text-gray-500">
+            {{ student.lrn }}
+          </td>
+          <td class="px-4 py-3 text-sm whitespace-nowrap text-gray-500">
+            Grade {{ student.grade }}-{{ student.section }}
+          </td>
+          <td class="px-4 py-3 text-sm whitespace-nowrap">
+            <span
+              class="rounded-full px-2 py-1 text-xs font-medium"
+              [ngClass]="{
+                'bg-green-100 text-green-800': student.isPresent,
+                'bg-red-100 text-red-800': !student.isPresent,
+              }"
+            >
+              {{ student.isPresent ? "Present" : "Absent" }}
+            </span>
+          </td>
+          <td class="px-4 py-3 text-sm whitespace-nowrap">
+            <span
+              class="rounded-full px-2 py-1 text-xs font-medium"
+              [ngClass]="{
+                'bg-blue-100 text-blue-800': student.healthStatus === 'Good',
+                'bg-yellow-100 text-yellow-800':
+                  student.healthStatus === 'Fair',
+                'bg-red-100 text-red-800':
+                  student.healthStatus === 'Needs Attention',
+              }"
+            >
+              {{ student.healthStatus }}
+            </span>
+          </td>
+          <td class="px-4 py-3 text-sm whitespace-nowrap">
+            <div class="flex gap-2">
+              <button
+                class="rounded-full p-1 text-blue-600 hover:bg-blue-50"
+                title="View Student"
+                (click)="viewStudent(student)"
+              >
+                <ng-icon [svg]="viewIcon" size="18"></ng-icon>
+              </button>
+              <button
+                class="rounded-full p-1 text-green-600 hover:bg-green-50"
+                title="Edit Student"
+                (click)="editStudent(student)"
+              >
+                <ng-icon [svg]="editIcon" size="18"></ng-icon>
+              </button>
+              <button
+                class="rounded-full p-1 text-indigo-600 hover:bg-indigo-50"
+                title="Attendance History"
+                (click)="viewAttendance(student)"
+              >
+                <ng-icon [svg]="attendanceIcon" size="18"></ng-icon>
+              </button>
+              <button
+                class="rounded-full p-1 text-rose-600 hover:bg-rose-50"
+                title="Health Records"
+                (click)="viewHealth(student)"
+              >
+                <ng-icon [svg]="healthIcon" size="18"></ng-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="mt-4 flex items-center justify-between">
+    <div class="text-sm text-gray-500">
+      Showing <span class="font-medium">{{ filteredStudents.length }}</span> of
+      <span class="font-medium">{{ students.length }}</span> students
+    </div>
+    <div class="flex gap-2">
+      <button
+        [disabled]="currentPage === 1"
+        class="rounded-md border p-2 transition-colors hover:bg-gray-50 disabled:opacity-50"
+      >
+        <ng-icon [svg]="prevIcon" size="20"></ng-icon>
+      </button>
+      <button class="bg-primary rounded-md border p-2 text-white">
+        {{ currentPage }}
+      </button>
+      <button
+        [disabled]="isLastPage()"
+        class="rounded-md border p-2 transition-colors hover:bg-gray-50 disabled:opacity-50"
+      >
+        <ng-icon [svg]="nextIcon" size="20"></ng-icon>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<div class="attendance-container">
+  <h1 class="mb-4 text-2xl font-bold text-gray-800">Attendance Tracking</h1>
+  <p class="mb-6 text-gray-600">Mark daily attendance for your classes</p>
+
+  <!-- Date selection and class tabs -->
+  <div class="mb-6 flex flex-wrap justify-between gap-4">
+    <div class="date-selector">
+      <h2 class="text-lg font-semibold text-gray-700">
+        {{ currentDate | date: "fullDate" }}
+      </h2>
+      <p class="text-sm text-gray-500">Today's Attendance</p>
+    </div>
+
+    <div class="class-selector">
+      <div class="class-tabs">
+        <button
+          *ngFor="let classData of classes"
+          class="class-tab"
+          [ngClass]="{ active: selectedClass.id === classData.id }"
+          (click)="selectClass(classData)"
+        >
+          {{ classData.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attendance Form -->
+  <form [formGroup]="attendanceForm" (ngSubmit)="submitAttendance()">
+    <div class="attendance-stats mb-6">
+      <div class="stat-card bg-green-100">
+        <div class="stat-icon">
+          <ng-icon
+            [svg]="presentIcon"
+            size="24"
+            class="text-green-600"
+          ></ng-icon>
+        </div>
+        <div class="stat-content">
+          <p class="text-sm text-gray-600">Present</p>
+          <p class="text-xl font-bold text-green-600">{{ presentCount }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-red-100">
+        <div class="stat-icon">
+          <ng-icon [svg]="absentIcon" size="24" class="text-red-600"></ng-icon>
+        </div>
+        <div class="stat-content">
+          <p class="text-sm text-gray-600">Absent</p>
+          <p class="text-xl font-bold text-red-600">{{ absentCount }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-yellow-100">
+        <div class="stat-icon">
+          <ng-icon
+            [svg]="personIcon"
+            size="24"
+            class="text-yellow-600"
+          ></ng-icon>
+        </div>
+        <div class="stat-content">
+          <p class="text-sm text-gray-600">Late</p>
+          <p class="text-xl font-bold text-yellow-600">{{ lateCount }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-gray-100">
+        <div class="stat-icon">
+          <ng-icon [svg]="personIcon" size="24" class="text-gray-600"></ng-icon>
+        </div>
+        <div class="stat-content">
+          <p class="text-sm text-gray-600">Not Marked</p>
+          <p class="text-xl font-bold text-gray-600">{{ notMarkedCount }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="attendance-list">
+      <div class="attendance-header">
+        <div class="student-info">Student</div>
+        <div class="attendance-actions">Attendance</div>
+        <div class="notes">Notes</div>
+      </div>
+
+      <div *ngFor="let student of selectedClass.students" class="student-row">
+        <div class="student-info">
+          <div class="student-avatar">
+            <ng-icon [svg]="personIcon" size="24"></ng-icon>
+          </div>
+          <div class="student-name">{{ student.name }}</div>
+        </div>
+
+        <div class="attendance-actions">
+          <button
+            type="button"
+            class="action-button"
+            [ngClass]="{ active: getStatus(student.id) === 'present' }"
+            (click)="markPresent(student.id)"
+          >
+            <ng-icon [svg]="presentIcon" size="20"></ng-icon>
+            <span>Present</span>
+          </button>
+
+          <button
+            type="button"
+            class="action-button"
+            [ngClass]="{ active: getStatus(student.id) === 'absent' }"
+            (click)="markAbsent(student.id)"
+          >
+            <ng-icon [svg]="absentIcon" size="20"></ng-icon>
+            <span>Absent</span>
+          </button>
+
+          <button
+            type="button"
+            class="action-button"
+            [ngClass]="{ active: getStatus(student.id) === 'late' }"
+            (click)="markLate(student.id)"
+          >
+            <ng-icon [svg]="personIcon" size="20"></ng-icon>
+            <span>Late</span>
+          </button>
+        </div>
+
+        <div class="notes">
+          <input
+            type="text"
+            class="note-input"
+            placeholder="Add notes..."
+            [formControlName]="'notes_' + student.id"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions mt-6">
+      <button type="button" class="reset-button" (click)="resetForm()">
+        Reset
+      </button>
+      <button type="submit" class="submit-button">Submit Attendance</button>
+    </div>
+  </form>
+
+  <!-- Success message when form is submitted -->
+  <div *ngIf="formSubmitted" class="success-message mt-4">
+    <p>
+      Attendance for {{ selectedClass.name }} has been successfully recorded!
+    </p>
+  </div>
+</div>

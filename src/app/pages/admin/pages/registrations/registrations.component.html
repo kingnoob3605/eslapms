@@ -1,1 +1,121 @@
-<p>registrations works!</p>
+<div class="registrations-container">
+  <div class="header-section">
+    <h1 class="page-title">Student Registrations</h1>
+    <p class="page-subtitle">
+      Manage and process student registration applications
+    </p>
+
+    <div class="actions-bar">
+      <div class="search-filter-container">
+        <div class="search-box">
+          <ng-icon [svg]="searchIcon" size="20" class="search-icon"></ng-icon>
+          <input
+            type="text"
+            placeholder="Search by student name..."
+            (input)="onSearch($event)"
+            class="search-input"
+          />
+        </div>
+
+        <div class="filter-box">
+          <ng-icon [svg]="filterIcon" size="20" class="filter-icon"></ng-icon>
+          <select (change)="onFilterChange($event)" class="filter-select">
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="add-button">
+        <ng-icon [svg]="addIcon" size="20"></ng-icon>
+        <span>Add New Registration</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="registrations-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Student Name</th>
+          <th>Grade Level</th>
+          <th>Date Submitted</th>
+          <th>Status</th>
+          <th>Contact Number</th>
+          <th>Type</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (registration of filteredRegistrations; track registration.id) {
+          <tr>
+            <td>{{ registration.id }}</td>
+            <td class="student-name">{{ registration.studentName }}</td>
+            <td>{{ registration.gradeLevel }}</td>
+            <td>{{ registration.dateSubmitted | date: "mediumDate" }}</td>
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(registration.status)"
+              >
+                {{ registration.status | titlecase }}
+              </span>
+            </td>
+            <td>{{ registration.contactNumber }}</td>
+            <td>{{ registration.registrationType | titlecase }}</td>
+            <td class="actions-cell">
+              <button
+                class="action-button view-button"
+                (click)="viewRegistration(registration.id)"
+              >
+                View
+              </button>
+              @if (registration.status === "pending") {
+                <button
+                  class="action-button approve-button"
+                  (click)="approveRegistration(registration.id)"
+                >
+                  <ng-icon [svg]="approveIcon" size="16"></ng-icon>
+                </button>
+              }
+              <button
+                class="action-button edit-button"
+                (click)="viewRegistration(registration.id)"
+              >
+                <ng-icon [svg]="editIcon" size="16"></ng-icon>
+              </button>
+              <button
+                class="action-button delete-button"
+                (click)="deleteRegistration(registration.id)"
+              >
+                <ng-icon [svg]="deleteIcon" size="16"></ng-icon>
+              </button>
+            </td>
+          </tr>
+        }
+
+        @if (filteredRegistrations.length === 0) {
+          <tr>
+            <td colspan="8" class="empty-state">
+              No registrations found. Try adjusting your search or filter
+              criteria.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination">
+    <button class="pagination-button" disabled>Previous</button>
+    <div class="pagination-info">
+      <span class="current-page">Page 1</span>
+      <span class="page-separator">of</span>
+      <span class="total-pages">1</span>
+    </div>
+    <button class="pagination-button" disabled>Next</button>
+  </div>
+</div>

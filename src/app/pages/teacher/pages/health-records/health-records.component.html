@@ -1,0 +1,221 @@
+<div class="health-records-container">
+  <h1 class="mb-4 text-2xl font-bold text-gray-800">Student Health Records</h1>
+  <p class="mb-6 text-gray-600">
+    View and update health information for your students
+  </p>
+
+  <div class="health-content">
+    <!-- Student list sidebar -->
+    <div class="student-sidebar">
+      <h2 class="sidebar-title">Students</h2>
+      <div class="student-list">
+        <div
+          *ngFor="let student of students"
+          class="student-item"
+          [ngClass]="{ active: selectedStudent?.id === student.id }"
+          (click)="selectStudent(student)"
+        >
+          <div class="student-avatar">
+            <ng-icon [svg]="personIcon" size="24"></ng-icon>
+          </div>
+          <div class="student-info">
+            <h3 class="student-name">{{ student.name }}</h3>
+            <p class="student-class">
+              Grade {{ student.grade }}-{{ student.section }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Health record details -->
+    <div class="health-details">
+      <div *ngIf="!selectedStudent" class="no-selection">
+        <p>Please select a student to view or update health records</p>
+      </div>
+
+      <div *ngIf="selectedStudent" class="student-health-record">
+        <div class="record-header">
+          <div class="student-header-info">
+            <h2 class="student-record-name">{{ selectedStudent.name }}</h2>
+            <p class="student-record-class">
+              Grade {{ selectedStudent.grade }}-{{ selectedStudent.section }}
+            </p>
+          </div>
+          <div class="last-updated">
+            <p>
+              Last updated:
+              {{ selectedStudent.healthData.lastUpdated | date: "medium" }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Current health summary -->
+        <div class="health-summary">
+          <div class="summary-card">
+            <div class="summary-icon bg-blue-100">
+              <ng-icon
+                [svg]="healthIcon"
+                size="24"
+                class="text-blue-600"
+              ></ng-icon>
+            </div>
+            <div class="summary-data">
+              <h3>Height</h3>
+              <p class="summary-value">
+                {{ selectedStudent.healthData.height }} cm
+              </p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-icon bg-green-100">
+              <ng-icon
+                [svg]="healthIcon"
+                size="24"
+                class="text-green-600"
+              ></ng-icon>
+            </div>
+            <div class="summary-data">
+              <h3>Weight</h3>
+              <p class="summary-value">
+                {{ selectedStudent.healthData.weight }} kg
+              </p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-icon bg-yellow-100">
+              <ng-icon
+                [svg]="healthIcon"
+                size="24"
+                class="text-yellow-600"
+              ></ng-icon>
+            </div>
+            <div class="summary-data">
+              <h3>BMI</h3>
+              <p class="summary-value">{{ selectedStudent.healthData.bmi }}</p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-icon bg-purple-100">
+              <ng-icon
+                [svg]="healthIcon"
+                size="24"
+                class="text-purple-600"
+              ></ng-icon>
+            </div>
+            <div class="summary-data">
+              <h3>Status</h3>
+              <p class="summary-value">
+                {{ selectedStudent.healthData.nutritionalStatus }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Health record form -->
+        <form
+          [formGroup]="healthForm"
+          (ngSubmit)="submitHealthForm()"
+          class="health-form"
+        >
+          <h3 class="form-section-title">Update Health Information</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Height (cm)</label>
+              <input
+                type="number"
+                formControlName="height"
+                class="form-input"
+                placeholder="Height in cm"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Weight (kg)</label>
+              <input
+                type="number"
+                formControlName="weight"
+                class="form-input"
+                placeholder="Weight in kg"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Vision</label>
+              <select formControlName="vision" class="form-select">
+                <option value="">Select status</option>
+                <option *ngFor="let option of visionOptions" [value]="option">
+                  {{ option }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Hearing</label>
+              <select formControlName="hearing" class="form-select">
+                <option value="">Select status</option>
+                <option *ngFor="let option of hearingOptions" [value]="option">
+                  {{ option }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Dental Health</label>
+              <select formControlName="dentalHealth" class="form-select">
+                <option value="">Select status</option>
+                <option *ngFor="let option of dentalOptions" [value]="option">
+                  {{ option }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Nutritional Status</label>
+              <select formControlName="nutritionalStatus" class="form-select">
+                <option value="">Select status</option>
+                <option
+                  *ngFor="let option of nutritionalOptions"
+                  [value]="option"
+                >
+                  {{ option }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Additional Notes</label>
+            <textarea
+              formControlName="notes"
+              class="form-textarea"
+              placeholder="Add any additional health information or observations..."
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="submit-button">
+              Update Health Record
+            </button>
+          </div>
+        </form>
+
+        <!-- Success message when form is submitted -->
+        <div *ngIf="formSubmitted" class="success-message">
+          <p>
+            Health record for {{ selectedStudent.name }} has been successfully
+            updated!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,13 @@ export const teacherRoutes: Routes = [
       ),
   },
   {
+    path: 'attendance',
+    loadComponent: () =>
+      import('./pages/attendance/attendance.component').then(
+        (component) => component.AttendanceComponent,
+      ),
+  },
+  {
     path: 'students',
     loadComponent: () =>
       import('../shared/pages/students/students.component').then(
@@ -28,6 +35,27 @@ export const teacherRoutes: Routes = [
     loadComponent: () =>
       import('../shared/pages/sections/sections.component').then(
         (component) => component.SectionsComponent,
+      ),
+  },
+  {
+    path: 'health',
+    loadComponent: () =>
+      import('./pages/health-records/health-records.component').then(
+        (component) => component.HealthRecordsComponent,
+      ),
+  },
+  {
+    path: 'messages',
+    loadComponent: () =>
+      import('./pages/messages/messages.component').then(
+        (component) => component.MessagesComponent,
+      ),
+  },
+  {
+    path: 'reports',
+    loadComponent: () =>
+      import('./pages/reports/reports.component').then(
+        (component) => component.ReportsComponent,
       ),
   },
   {

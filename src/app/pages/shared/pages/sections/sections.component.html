@@ -1,1 +1,364 @@
-<p>sections works!</p>
+<div class="sections-container">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Sections Management</h1>
+    <p class="text-gray-600">View and manage all class sections</p>
+  </div>
+
+  <!-- Search and Action Bar -->
+  <div
+    class="mb-6 flex flex-wrap items-center justify-between gap-4 rounded-lg bg-white p-4 shadow"
+  >
+    <div class="flex flex-grow flex-wrap items-center gap-2">
+      <div class="relative flex-grow">
+        <input
+          type="text"
+          placeholder="Search sections..."
+          class="w-full rounded-lg border border-gray-300 p-2 pl-10 focus:border-indigo-500 focus:outline-none"
+        />
+        <span class="absolute top-2.5 left-3 text-gray-400">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <select
+          class="rounded-lg border border-gray-300 p-2 focus:border-indigo-500 focus:outline-none"
+        >
+          <option value="">All Grade Levels</option>
+          <option>Grade 1</option>
+        </select>
+        <select
+          class="rounded-lg border border-gray-300 p-2 focus:border-indigo-500 focus:outline-none"
+        >
+          <option value="">All School Years</option>
+          <option>2024-2025</option>
+          <option>2023-2024</option>
+        </select>
+      </div>
+    </div>
+    <button
+      class="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      Create Section
+    </button>
+  </div>
+
+  <!-- Sections Grid -->
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <!-- Section Card 1 -->
+    <div
+      class="section-card rounded-lg bg-white shadow transition-all hover:shadow-lg"
+    >
+      <div
+        class="flex items-center justify-between border-b border-gray-200 p-4"
+      >
+        <h3 class="text-lg font-bold text-gray-800">Grade 1 - Section A</h3>
+        <div
+          class="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800"
+        >
+          Active
+        </div>
+      </div>
+      <div class="p-4">
+        <div class="mb-4">
+          <p class="mb-1 text-sm font-medium text-gray-500">Section Adviser</p>
+          <div class="flex items-center">
+            <div
+              class="mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-700"
+            >
+              MS
+            </div>
+            <span class="text-gray-700">Maria Santos</span>
+          </div>
+        </div>
+        <div class="mb-4 grid grid-cols-2 gap-4">
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">Students</p>
+            <p class="font-semibold text-gray-800">35</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">School Year</p>
+            <p class="font-semibold text-gray-800">2024-2025</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">Room</p>
+            <p class="font-semibold text-gray-800">Room 101</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">Schedule</p>
+            <p class="font-semibold text-gray-800">7:30 AM - 4:30 PM</p>
+          </div>
+        </div>
+        <div class="mb-2 flex items-center">
+          <div class="mr-2 h-3 w-3 rounded-full bg-blue-500"></div>
+          <p class="text-sm text-gray-600">25 Boys</p>
+          <div class="mx-4 h-3 w-3 rounded-full bg-pink-500"></div>
+          <p class="text-sm text-gray-600">10 Girls</p>
+        </div>
+      </div>
+      <div class="flex items-center justify-between bg-gray-50 p-4">
+        <a
+          href="#"
+          class="text-sm font-medium text-indigo-600 hover:text-indigo-800"
+          >View Details</a
+        >
+        <div class="flex gap-2">
+          <button
+            class="rounded p-1 text-gray-400 hover:bg-gray-200 hover:text-blue-500"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              ></path>
+            </svg>
+          </button>
+          <button
+            class="rounded p-1 text-gray-400 hover:bg-gray-200 hover:text-red-500"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Card 2 -->
+    <div
+      class="section-card rounded-lg bg-white shadow transition-all hover:shadow-lg"
+    >
+      <div
+        class="flex items-center justify-between border-b border-gray-200 p-4"
+      >
+        <h3 class="text-lg font-bold text-gray-800">Grade 1 - Section B</h3>
+        <div
+          class="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800"
+        >
+          Active
+        </div>
+      </div>
+      <div class="p-4">
+        <div class="mb-4">
+          <p class="mb-1 text-sm font-medium text-gray-500">Section Adviser</p>
+          <div class="flex items-center">
+            <div
+              class="mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-green-100 font-bold text-green-700"
+            >
+              JR
+            </div>
+            <span class="text-gray-700">Juan Reyes</span>
+          </div>
+        </div>
+        <div class="mb-4 grid grid-cols-2 gap-4">
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">Students</p>
+            <p class="font-semibold text-gray-800">32</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">School Year</p>
+            <p class="font-semibold text-gray-800">2024-2025</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">Room</p>
+            <p class="font-semibold text-gray-800">Room 305</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">Schedule</p>
+            <p class="font-semibold text-gray-800">7:30 AM - 4:30 PM</p>
+          </div>
+        </div>
+        <div class="mb-2 flex items-center">
+          <div class="mr-2 h-3 w-3 rounded-full bg-blue-500"></div>
+          <p class="text-sm text-gray-600">18 Boys</p>
+          <div class="mx-4 h-3 w-3 rounded-full bg-pink-500"></div>
+          <p class="text-sm text-gray-600">14 Girls</p>
+        </div>
+      </div>
+      <div class="flex items-center justify-between bg-gray-50 p-4">
+        <a
+          href="#"
+          class="text-sm font-medium text-indigo-600 hover:text-indigo-800"
+          >View Details</a
+        >
+        <div class="flex gap-2">
+          <button
+            class="rounded p-1 text-gray-400 hover:bg-gray-200 hover:text-blue-500"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              ></path>
+            </svg>
+          </button>
+          <button
+            class="rounded p-1 text-gray-400 hover:bg-gray-200 hover:text-red-500"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Card 3 -->
+    <div
+      class="section-card rounded-lg bg-white shadow transition-all hover:shadow-lg"
+    >
+      <div
+        class="flex items-center justify-between border-b border-gray-200 p-4"
+      >
+        <h3 class="text-lg font-bold text-gray-800">Grade 1 - Section A</h3>
+        <div
+          class="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800"
+        >
+          Active
+        </div>
+      </div>
+      <div class="p-4">
+        <div class="mb-4">
+          <p class="mb-1 text-sm font-medium text-gray-500">Section Adviser</p>
+          <div class="flex items-center">
+            <div
+              class="mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 font-bold text-purple-700"
+            >
+              AC
+            </div>
+            <span class="text-gray-700">Anna Cruz</span>
+          </div>
+        </div>
+        <div class="mb-4 grid grid-cols-2 gap-4">
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">Students</p>
+            <p class="font-semibold text-gray-800">30</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">School Year</p>
+            <p class="font-semibold text-gray-800">2024-2025</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">Room</p>
+            <p class="font-semibold text-gray-800">Room 601</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-medium text-gray-500">Schedule</p>
+            <p class="font-semibold text-gray-800">7:30 AM - 4:30 PM</p>
+          </div>
+        </div>
+        <div class="mb-2 flex items-center">
+          <div class="mr-2 h-3 w-3 rounded-full bg-blue-500"></div>
+          <p class="text-sm text-gray-600">16 Boys</p>
+          <div class="mx-4 h-3 w-3 rounded-full bg-pink-500"></div>
+          <p class="text-sm text-gray-600">14 Girls</p>
+        </div>
+      </div>
+      <div class="flex items-center justify-between bg-gray-50 p-4">
+        <a
+          href="#"
+          class="text-sm font-medium text-indigo-600 hover:text-indigo-800"
+          >View Details</a
+        >
+        <div class="flex gap-2">
+          <button
+            class="rounded p-1 text-gray-400 hover:bg-gray-200 hover:text-blue-500"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              ></path>
+            </svg>
+          </button>
+          <button
+            class="rounded p-1 text-gray-400 hover:bg-gray-200 hover:text-red-500"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

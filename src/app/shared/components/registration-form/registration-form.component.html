@@ -1,55 +1,888 @@
-<form
-  [formGroup]="registrationForm"
-  (ngSubmit)="onSubmit()"
-  class="flex h-full flex-col gap-2 rounded-sm bg-white/90 p-2 backdrop-blur-sm"
->
-  <app-input
-    label="Learner Reference Number"
-    type="text"
-    placeholder="e.g. 123456789012"
-    [required]="true"
-    formControlName="learnerReferenceNo"
-  />
-  <app-input
-    label="School Year"
-    type="text"
-    placeholder="e.g. 2025-2026"
-    [required]="true"
-    formControlName="schoolYear"
-  />
-  <div formGroupName="personalInfo">
-    <app-input
-      label="PSA Birth Certificate Number"
-      type="text"
-      placeholder="e.g. 123456789"
-      [required]="true"
-      formControlName="psaBirthCertificateNo"
-    />
-    <app-input
-      label="Firstname"
-      type="text"
-      placeholder="e.g. Juan"
-      [required]="true"
-      formControlName="firstName"
-    />
-    <app-input
-      label="Lastname"
-      type="text"
-      placeholder="e.g. Dela Cruz"
-      [required]="true"
-      formControlName="lastName"
-    />
-    <app-input
-      label="Middlename"
-      type="text"
-      placeholder="e.g. Reyes"
-      [required]="true"
-      formControlName="middleName"
-    />
-  </div>
-  <app-button type="submit">Submit</app-button>
-</form>
+<div class="registration-container">
+  <h1 class="form-title">Student Registration Form</h1>
+  <p class="form-subtitle">Please fill out all required information</p>
 
-<div class="overflow-auto rounded-sm bg-white/90 p-2 backdrop-blur-sm">
-  <pre>{{ registrationForm.value | json }}</pre>
+  <form
+    [formGroup]="registrationForm"
+    (ngSubmit)="onSubmit()"
+    class="registration-form"
+  >
+    <!-- Top Form Section -->
+    <div class="form-section">
+      <h2 class="section-header">Learner Information</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="learnerRefNo">Learner Reference Number (LRN)</label>
+          <input
+            id="learnerRefNo"
+            type="text"
+            class="form-control"
+            formControlName="learnerReferenceNo"
+            placeholder="e.g. 123456789012"
+          />
+        </div>
+        <div class="form-group">
+          <label for="schoolYear">School Year</label>
+          <input
+            id="schoolYear"
+            type="text"
+            class="form-control"
+            formControlName="schoolYear"
+            placeholder="e.g. 2025-2026"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade Level Section -->
+    <div class="form-section" formGroupName="gradeLevelToEnroll">
+      <h2 class="section-header">Grade Level</h2>
+      <div formGroupName="graded">
+        <div class="form-row">
+          <div class="form-group checkbox-group">
+            <label>
+              <input type="checkbox" formControlName="isGraded" />
+              Graded
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="gradeLevel">Grade Level</label>
+            <select
+              id="gradeLevel"
+              class="form-control"
+              formControlName="gradeLevel"
+            >
+              <option value="">Select grade level</option>
+              <option value="1">Grade 1</option>
+              <option value="2">Grade 2</option>
+              <option value="3">Grade 3</option>
+              <option value="4">Grade 4</option>
+              <option value="5">Grade 5</option>
+              <option value="6">Grade 6</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div formGroupName="nonGraded">
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="isNonGraded" />
+            Non-Graded
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Information Section -->
+    <div class="form-section" formGroupName="personalInfo">
+      <h2 class="section-header">Personal Information</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="psaBirthCertNo">PSA Birth Certificate No.</label>
+          <input
+            id="psaBirthCertNo"
+            type="text"
+            class="form-control"
+            formControlName="psaBirthCertificateNo"
+            placeholder="e.g. 1234-5678-9012"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName"
+            >First Name <span class="required">*</span></label
+          >
+          <input
+            id="firstName"
+            type="text"
+            class="form-control"
+            formControlName="firstName"
+            placeholder="e.g. Juan"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastName"
+            >Last Name <span class="required">*</span></label
+          >
+          <input
+            id="lastName"
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            placeholder="e.g. Dela Cruz"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="middleName">Middle Name</label>
+          <input
+            id="middleName"
+            type="text"
+            class="form-control"
+            formControlName="middleName"
+            placeholder="e.g. Santos"
+          />
+        </div>
+        <div class="form-group">
+          <label for="extensionName">Extension Name</label>
+          <input
+            id="extensionName"
+            type="text"
+            class="form-control"
+            formControlName="extensionName"
+            placeholder="e.g. Jr., III"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="birthDate"
+            >Birth Date <span class="required">*</span></label
+          >
+          <input
+            id="birthDate"
+            type="date"
+            class="form-control"
+            formControlName="birthDate"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input
+            id="age"
+            type="number"
+            class="form-control"
+            formControlName="age"
+            min="0"
+            max="20"
+          />
+        </div>
+        <div class="form-group">
+          <label for="sex">Sex <span class="required">*</span></label>
+          <select id="sex" class="form-control" formControlName="sex" required>
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="placeOfBirth">Place of Birth</label>
+          <input
+            id="placeOfBirth"
+            type="text"
+            class="form-control"
+            formControlName="placeOfBirth"
+            placeholder="e.g. Davao City, Philippines"
+          />
+        </div>
+        <div class="form-group">
+          <label for="religion">Religion</label>
+          <input
+            id="religion"
+            type="text"
+            class="form-control"
+            formControlName="religion"
+            placeholder="e.g. Roman Catholic"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="motherTounge">Mother Tongue</label>
+          <input
+            id="motherTounge"
+            type="text"
+            class="form-control"
+            formControlName="motherTounge"
+            placeholder="e.g. Cebuano"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group checkbox-group">
+          <label>
+            <input
+              type="checkbox"
+              formControlName="isIndigenousCommunityMemeber"
+            />
+            Member of Indigenous Community
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="community">Community</label>
+          <input
+            id="community"
+            type="text"
+            class="form-control"
+            formControlName="community"
+            placeholder="Specify community"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="is4PsBeneficiary" />
+            4Ps Beneficiary
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="hhIdNumber">Household ID Number</label>
+          <input
+            id="hhIdNumber"
+            type="text"
+            class="form-control"
+            formControlName="houseHoldIdNumber"
+            placeholder="Enter household ID number"
+          />
+        </div>
+      </div>
+
+      <!-- Current Address Section -->
+      <div formGroupName="currentAddress">
+        <h3 class="subsection-header">Current Address</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="curHouseNo">House No.</label>
+            <input
+              id="curHouseNo"
+              type="text"
+              class="form-control"
+              formControlName="houseNo"
+              placeholder="e.g. 123"
+            />
+          </div>
+          <div class="form-group">
+            <label for="curStreetName">Street Name</label>
+            <input
+              id="curStreetName"
+              type="text"
+              class="form-control"
+              formControlName="streetName"
+              placeholder="e.g. Main Street"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="curBarangay"
+              >Barangay <span class="required">*</span></label
+            >
+            <input
+              id="curBarangay"
+              type="text"
+              class="form-control"
+              formControlName="barangay"
+              placeholder="e.g. Sta. Maria"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="curMunicipalityCity"
+              >Municipality/City <span class="required">*</span></label
+            >
+            <input
+              id="curMunicipalityCity"
+              type="text"
+              class="form-control"
+              formControlName="municipalityCity"
+              placeholder="e.g. Davao City"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="curProvince"
+              >Province <span class="required">*</span></label
+            >
+            <input
+              id="curProvince"
+              type="text"
+              class="form-control"
+              formControlName="province"
+              placeholder="e.g. Davao del Sur"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="curCountry"
+              >Country <span class="required">*</span></label
+            >
+            <input
+              id="curCountry"
+              type="text"
+              class="form-control"
+              formControlName="country"
+              placeholder="e.g. Philippines"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="curZipCode">Zip Code</label>
+            <input
+              id="curZipCode"
+              type="text"
+              class="form-control"
+              formControlName="zipCode"
+              placeholder="e.g. 8000"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Permanent Address Section -->
+      <div formGroupName="permanentAddress">
+        <h3 class="subsection-header">Permanent Address</h3>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="isCurrentAddress" />
+            Same as Current Address
+          </label>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="permHouseNo">House No.</label>
+            <input
+              id="permHouseNo"
+              type="text"
+              class="form-control"
+              formControlName="houseNo"
+              placeholder="e.g. 123"
+            />
+          </div>
+          <div class="form-group">
+            <label for="permStreetName">Street Name</label>
+            <input
+              id="permStreetName"
+              type="text"
+              class="form-control"
+              formControlName="streetName"
+              placeholder="e.g. Main Street"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="permBarangay">Barangay</label>
+            <input
+              id="permBarangay"
+              type="text"
+              class="form-control"
+              formControlName="barangay"
+              placeholder="e.g. Sta. Maria"
+            />
+          </div>
+          <div class="form-group">
+            <label for="permMunicipalityCity">Municipality/City</label>
+            <input
+              id="permMunicipalityCity"
+              type="text"
+              class="form-control"
+              formControlName="municipalityCity"
+              placeholder="e.g. Davao City"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="permProvince">Province</label>
+            <input
+              id="permProvince"
+              type="text"
+              class="form-control"
+              formControlName="province"
+              placeholder="e.g. Davao del Sur"
+            />
+          </div>
+          <div class="form-group">
+            <label for="permCountry">Country</label>
+            <input
+              id="permCountry"
+              type="text"
+              class="form-control"
+              formControlName="country"
+              placeholder="e.g. Philippines"
+            />
+          </div>
+          <div class="form-group">
+            <label for="permZipCode">Zip Code</label>
+            <input
+              id="permZipCode"
+              type="text"
+              class="form-control"
+              formControlName="zipCode"
+              placeholder="e.g. 8000"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parent/Guardian Information -->
+    <div class="form-section" formGroupName="parentGuardiansInfo">
+      <h2 class="section-header">Parent/Guardian Information</h2>
+
+      <!-- Father's Information -->
+      <div formGroupName="father">
+        <h3 class="subsection-header">Father's Information</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fatherLastName">Last Name</label>
+            <input
+              id="fatherLastName"
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              placeholder="Father's Last Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="fatherFirstName">First Name</label>
+            <input
+              id="fatherFirstName"
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              placeholder="Father's First Name"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fatherMiddleName">Middle Name</label>
+            <input
+              id="fatherMiddleName"
+              type="text"
+              class="form-control"
+              formControlName="middleName"
+              placeholder="Father's Middle Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="fatherContactNumber">Contact Number</label>
+            <input
+              id="fatherContactNumber"
+              type="tel"
+              class="form-control"
+              formControlName="contactNumber"
+              placeholder="e.g. 09123456789"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Mother's Information -->
+      <div formGroupName="mother">
+        <h3 class="subsection-header">Mother's Information</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="motherLastName">Last Name</label>
+            <input
+              id="motherLastName"
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              placeholder="Mother's Last Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="motherFirstName">First Name</label>
+            <input
+              id="motherFirstName"
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              placeholder="Mother's First Name"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="motherMiddleName">Middle Name</label>
+            <input
+              id="motherMiddleName"
+              type="text"
+              class="form-control"
+              formControlName="middleName"
+              placeholder="Mother's Middle Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="motherContactNumber">Contact Number</label>
+            <input
+              id="motherContactNumber"
+              type="tel"
+              class="form-control"
+              formControlName="contactNumber"
+              placeholder="e.g. 09123456789"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Guardian's Information -->
+      <div formGroupName="guardian">
+        <h3 class="subsection-header">Guardian's Information</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="guardianLastName">Last Name</label>
+            <input
+              id="guardianLastName"
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              placeholder="Guardian's Last Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="guardianFirstName">First Name</label>
+            <input
+              id="guardianFirstName"
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              placeholder="Guardian's First Name"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="guardianMiddleName">Middle Name</label>
+            <input
+              id="guardianMiddleName"
+              type="text"
+              class="form-control"
+              formControlName="middleName"
+              placeholder="Guardian's Middle Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="guardianContactNumber">Contact Number</label>
+            <input
+              id="guardianContactNumber"
+              type="tel"
+              class="form-control"
+              formControlName="contactNumber"
+              placeholder="e.g. 09123456789"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Special Needs Section -->
+    <div class="form-section" formGroupName="specialNeeds">
+      <h2 class="section-header">Special Needs Information</h2>
+      <div class="form-group checkbox-group">
+        <label>
+          <input type="checkbox" formControlName="isUnderSpecialNeedsProgram" />
+          Under Special Needs Program
+        </label>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="withDiagnosis">With Diagnosis</label>
+          <select
+            id="withDiagnosis"
+            class="form-control"
+            formControlName="withDiagnosis"
+          >
+            <option value="">None</option>
+            <option value="Attention Deficit Hyperactivity Disorder">
+              ADHD
+            </option>
+            <option value="Autism Spectrum Disorder">ASD</option>
+            <option value="Cerebral Palsy">Cerebral Palsy</option>
+            <option value="Emotional-Behavior Disorder">
+              Emotional-Behavior Disorder
+            </option>
+            <option value="Hearing Impairment">Hearing Impairment</option>
+            <option value="Intellectual Disability">
+              Intellectual Disability
+            </option>
+            <option value="Learning Disability">Learning Disability</option>
+            <option value="Multiple Disability">Multiple Disabilities</option>
+            <option value="Orthopedic/Physical Handicap">
+              Physical Handicap
+            </option>
+            <option value="Speech/Language Disorder">
+              Speech/Language Disorder
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="withChronicDisease">With Chronic Disease</label>
+          <select
+            id="withChronicDisease"
+            class="form-control"
+            formControlName="withChronicDisease"
+          >
+            <option value="">None</option>
+            <option value="Cancer">Cancer</option>
+            <option value="Non-Cancer">Non-Cancer</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="withVisualImpairment">With Visual Impairment</label>
+          <select
+            id="withVisualImpairment"
+            class="form-control"
+            formControlName="withVisualImpairment"
+          >
+            <option value="">None</option>
+            <option value="Blind">Blind</option>
+            <option value="Low Vision">Low Vision</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="withManifestations">With Manifestations</label>
+          <select
+            id="withManifestations"
+            class="form-control"
+            formControlName="withManifestations"
+          >
+            <option value="">None</option>
+            <option value="Difficulty in Applying Knowledge">
+              Difficulty in Applying Knowledge
+            </option>
+            <option value="Difficulty in Communicating">
+              Difficulty in Communicating
+            </option>
+            <option value="Difficulty in Displaying Interpersonal Behavior">
+              Difficulty in Interpersonal Behavior
+            </option>
+            <option value="Difficulty in Hearing">Difficulty in Hearing</option>
+            <option value="Difficulty in Mobility">
+              Difficulty in Mobility
+            </option>
+            <option value="Difficulty in Performing Adaptive Skills">
+              Difficulty in Self-Care
+            </option>
+            <option
+              value="Difficulty in Remembering, Concentrating, Paying Attention and Understanding"
+            >
+              Difficulty in Concentration/Memory
+            </option>
+            <option value="Difficulty in Seeing">Difficulty in Seeing</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label>
+          <input type="checkbox" formControlName="hasPwdId" />
+          Has PWD ID
+        </label>
+      </div>
+    </div>
+
+    <!-- Returning Learner Section -->
+    <div class="form-section" formGroupName="returningLearner">
+      <h2 class="section-header">Returning Learner Information</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="lastGradeLevelCompleted"
+            >Last Grade Level Completed</label
+          >
+          <select
+            id="lastGradeLevelCompleted"
+            class="form-control"
+            formControlName="lastGradeLevelCompleted"
+          >
+            <option value="">Select</option>
+            <option value="1">Grade 1</option>
+            <option value="2">Grade 2</option>
+            <option value="3">Grade 3</option>
+            <option value="4">Grade 4</option>
+            <option value="5">Grade 5</option>
+            <option value="6">Grade 6</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="lastSchoolYearCompleted"
+            >Last School Year Completed</label
+          >
+          <input
+            id="lastSchoolYearCompleted"
+            type="text"
+            class="form-control"
+            formControlName="lastSchoolYearCompleted"
+            placeholder="e.g. 2024-2025"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="lastSchoolAttended">Last School Attended</label>
+          <input
+            id="lastSchoolAttended"
+            type="text"
+            class="form-control"
+            formControlName="lastSchoolAttended"
+            placeholder="Name of school"
+          />
+        </div>
+        <div class="form-group">
+          <label for="schoolId">School ID</label>
+          <input
+            id="schoolId"
+            type="text"
+            class="form-control"
+            formControlName="schoolId"
+            placeholder="School ID number"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Senior High School (If applicable) -->
+    <div class="form-section" formGroupName="seniorHighSchool">
+      <h2 class="section-header">
+        Senior High School Information (If applicable)
+      </h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="semester">Semester</label>
+          <select id="semester" class="form-control" formControlName="semester">
+            <option value="">Select</option>
+            <option value="First Semeseter">First Semester</option>
+            <option value="Second Semester">Second Semester</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="track">Track</label>
+          <input
+            id="track"
+            type="text"
+            class="form-control"
+            formControlName="track"
+            placeholder="e.g. Academic, TVL"
+          />
+        </div>
+        <div class="form-group">
+          <label for="strand">Strand</label>
+          <input
+            id="strand"
+            type="text"
+            class="form-control"
+            formControlName="strand"
+            placeholder="e.g. STEM, ABM, HUMSS"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Preferred Learning Modalities -->
+    <div class="form-section" formGroupName="preferredLearningModalities">
+      <h2 class="section-header">Preferred Learning Modalities</h2>
+      <div class="checkbox-list">
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="blended" />
+            Blended
+          </label>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="educationalTelevision" />
+            Educational Television
+          </label>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="homeSchooling" />
+            Home Schooling
+          </label>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="modularDigital" />
+            Modular Digital
+          </label>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="modularPrint" />
+            Modular Print
+          </label>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="online" />
+            Online
+          </label>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="radioBased" />
+            Radio-Based
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Declaration -->
+    <div class="form-section" formGroupName="declaration">
+      <h2 class="section-header">Declaration</h2>
+      <div class="form-group checkbox-group disclaimer">
+        <label>
+          <input type="checkbox" formControlName="agreed" />
+          I hereby certify that the above information given are true and correct
+          to the best of my knowledge and I allow the Department of Education to
+          use my child's details to create and/or update his/her learner profile
+          in the Learner Information System. The information herein shall be
+          treated as confidential in compliance with the Data Privacy Act of
+          2012.
+        </label>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="printedName">Name of Parent/Guardian</label>
+          <input
+            id="printedName"
+            type="text"
+            class="form-control"
+            formControlName="printedName"
+            placeholder="Full Name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="dateAgreed">Date</label>
+          <input
+            id="dateAgreed"
+            type="date"
+            class="form-control"
+            formControlName="dateAgreed"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Buttons -->
+    <div class="form-actions">
+      <button type="reset" class="btn-secondary">Clear Form</button>
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="!registrationForm.valid"
+      >
+        Submit Registration
+      </button>
+    </div>
+  </form>
 </div>

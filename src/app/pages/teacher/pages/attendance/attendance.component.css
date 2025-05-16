@@ -1,0 +1,214 @@
+.attendance-container {
+  padding: 1rem;
+}
+
+/* Class tabs styling */
+.class-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.class-tab {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.class-tab:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.class-tab.active {
+  background-color: #3498db;
+  color: white;
+  border-color: #2980b9;
+}
+
+/* Attendance stats */
+.attendance-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Attendance list */
+.attendance-list {
+  background-color: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.attendance-header {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  font-weight: 600;
+}
+
+.student-row {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.2s ease;
+}
+
+.student-row:last-child {
+  border-bottom: none;
+}
+
+.student-row:hover {
+  background-color: #f8f9fa;
+}
+
+.student-info {
+  display: flex;
+  align-items: center;
+}
+
+.student-avatar {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e9ecef;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.student-name {
+  font-weight: 500;
+}
+
+.attendance-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #dee2e6;
+  background-color: white;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #f8f9fa;
+}
+
+.action-button.active {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  font-weight: 500;
+}
+
+.notes {
+  padding: 0 0.5rem;
+}
+
+.note-input {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #dee2e6;
+  font-size: 0.875rem;
+}
+
+/* Form actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.reset-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+  background-color: #e9ecef;
+}
+
+.submit-button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.25rem;
+  background-color: #3498db;
+  color: white;
+  border: 1px solid #2980b9;
+  transition: all 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #2980b9;
+}
+
+/* Success message */
+.success-message {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .attendance-header,
+  .student-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .attendance-header > div:not(:first-child),
+  .student-row > div:not(:first-child) {
+    padding-left: 3rem;
+  }
+
+  .attendance-actions {
+    flex-wrap: wrap;
+  }
+}

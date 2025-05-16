@@ -1,1 +1,294 @@
-<p>teacher-dashboard works!</p>
+<div>
+  <!-- Dashboard Header -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Teacher Dashboard</h1>
+    <p class="text-gray-600">Welcome to Sta. Maria Central School - ESLAPMS</p>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="stats-container">
+    <div class="stat-card bg-blue-100">
+      <div class="stat-icon-container">
+        <ng-icon [svg]="studentIcon" size="24" class="text-blue-800"></ng-icon>
+      </div>
+      <div class="stat-text">
+        <h3 class="text-xl font-bold text-blue-800">35</h3>
+        <p class="text-sm text-gray-700">Students</p>
+      </div>
+    </div>
+
+    <div class="stat-card bg-green-100">
+      <div class="stat-icon-container">
+        <ng-icon
+          [svg]="attendanceIcon"
+          size="24"
+          class="text-green-800"
+        ></ng-icon>
+      </div>
+      <div class="stat-text">
+        <h3 class="text-xl font-bold text-green-800">32</h3>
+        <p class="text-sm text-gray-700">Present Today</p>
+      </div>
+    </div>
+
+    <div class="stat-card bg-yellow-100">
+      <div class="stat-icon-container">
+        <ng-icon
+          [svg]="subjectIcon"
+          size="24"
+          class="text-yellow-800"
+        ></ng-icon>
+      </div>
+      <div class="stat-text">
+        <h3 class="text-xl font-bold text-yellow-800">5</h3>
+        <p class="text-sm text-gray-700">Subjects</p>
+      </div>
+    </div>
+
+    <div class="stat-card bg-purple-100">
+      <div class="stat-icon-container">
+        <ng-icon
+          [svg]="sectionIcon"
+          size="24"
+          class="text-purple-800"
+        ></ng-icon>
+      </div>
+      <div class="stat-text">
+        <h3 class="text-xl font-bold text-purple-800">2</h3>
+        <p class="text-sm text-gray-700">Sections</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Content -->
+  <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <!-- Quick Actions Section -->
+    <div class="lg:col-span-2">
+      <div class="dashboard-section">
+        <h2 class="section-title">Quick Actions</h2>
+        <div class="quick-actions-grid">
+          <!-- Take Attendance -->
+          <div (click)="navigateTo('/teacher/attendance')" class="action-card">
+            <ng-icon
+              [svg]="attendanceIcon"
+              size="32"
+              class="mb-2 text-blue-600"
+            ></ng-icon>
+            <h3 class="font-medium">Take Attendance</h3>
+            <p class="text-xs text-gray-600">Mark daily attendance</p>
+          </div>
+
+          <!-- Manage Students -->
+          <div (click)="navigateTo('/teacher/students')" class="action-card">
+            <ng-icon
+              [svg]="studentIcon"
+              size="32"
+              class="mb-2 text-green-600"
+            ></ng-icon>
+            <h3 class="font-medium">Students</h3>
+            <p class="text-xs text-gray-600">View & manage student profiles</p>
+          </div>
+
+          <!-- Health Records -->
+          <div (click)="navigateTo('/teacher/health')" class="action-card">
+            <ng-icon
+              [svg]="healthIcon"
+              size="32"
+              class="mb-2 text-red-600"
+            ></ng-icon>
+            <h3 class="font-medium">Health Records</h3>
+            <p class="text-xs text-gray-600">Update health information</p>
+          </div>
+
+          <!-- Generate Reports -->
+          <div (click)="navigateTo('/teacher/reports')" class="action-card">
+            <ng-icon
+              [svg]="reportIcon"
+              size="32"
+              class="mb-2 text-yellow-600"
+            ></ng-icon>
+            <h3 class="font-medium">Generate Reports</h3>
+            <p class="text-xs text-gray-600">SF1, SF2, SF4, SF8 reports</p>
+          </div>
+
+          <!-- View Schedule -->
+          <div (click)="navigateTo('/teacher/schedule')" class="action-card">
+            <ng-icon
+              [svg]="scheduleIcon"
+              size="32"
+              class="mb-2 text-purple-600"
+            ></ng-icon>
+            <h3 class="font-medium">My Schedule</h3>
+            <p class="text-xs text-gray-600">View teaching schedule</p>
+          </div>
+
+          <!-- Contact Parents -->
+          <div (click)="navigateTo('/teacher/messages')" class="action-card">
+            <ng-icon
+              [svg]="messageIcon"
+              size="32"
+              class="mb-2 text-orange-600"
+            ></ng-icon>
+            <h3 class="font-medium">Messages</h3>
+            <p class="text-xs text-gray-600">Contact parents</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Class Overview Section -->
+      <div class="dashboard-section mt-6">
+        <h2 class="section-title">Class Overview</h2>
+        <div class="class-tabs">
+          <button
+            class="class-tab"
+            [ngClass]="{ active: selectedClass === 'Grade 3-A' }"
+            (click)="selectClass('Grade 3-A')"
+          >
+            Grade 3-A
+          </button>
+          <button
+            class="class-tab"
+            [ngClass]="{ active: selectedClass === 'Grade 3-B' }"
+            (click)="selectClass('Grade 3-B')"
+          >
+            Grade 3-B
+          </button>
+        </div>
+
+        <div class="class-info mt-4">
+          <h3 class="mb-2 font-semibold text-gray-800">
+            {{ selectedClass }} Attendance Today
+          </h3>
+          <div class="attendance-overview">
+            <div class="attendance-stat bg-green-50">
+              <h3 class="text-gray-600">Present</h3>
+              <p class="text-green-600">
+                {{ selectedClass === "Grade 3-A" ? 18 : 14 }}
+              </p>
+            </div>
+            <div class="attendance-stat bg-red-50">
+              <h3 class="text-gray-600">Absent</h3>
+              <p class="text-red-600">
+                {{ selectedClass === "Grade 3-A" ? 2 : 1 }}
+              </p>
+            </div>
+            <div class="attendance-stat bg-blue-50">
+              <h3 class="text-gray-600">Attendance Rate</h3>
+              <p class="text-blue-600">
+                {{ selectedClass === "Grade 3-A" ? "90%" : "93%" }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activities Section -->
+    <div class="lg:col-span-1">
+      <div class="dashboard-section h-full">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="section-title">Recent Activities</h2>
+          <ng-icon
+            [svg]="notificationIcon"
+            size="24"
+            class="text-gray-600"
+          ></ng-icon>
+        </div>
+
+        <div class="activities-list">
+          <div class="activity-item">
+            <div class="flex justify-between">
+              <h3 class="font-medium">Attendance Updated</h3>
+              <span class="text-xs text-gray-500">Today, 8:30 AM</span>
+            </div>
+            <p class="text-sm text-gray-600">
+              You've updated attendance for Grade 3-A
+            </p>
+            <span class="badge bg-blue-100 text-blue-800">Attendance</span>
+          </div>
+
+          <div class="activity-item">
+            <div class="flex justify-between">
+              <h3 class="font-medium">Health Record Updated</h3>
+              <span class="text-xs text-gray-500">Yesterday</span>
+            </div>
+            <p class="text-sm text-gray-600">
+              Updated health records for Maria Santos
+            </p>
+            <span class="badge bg-green-100 text-green-800">Health</span>
+          </div>
+
+          <div class="activity-item">
+            <div class="flex justify-between">
+              <h3 class="font-medium">New Student</h3>
+              <span class="text-xs text-gray-500">May 14, 2025</span>
+            </div>
+            <p class="text-sm text-gray-600">
+              Juan Dela Cruz was enrolled in Grade 3-A
+            </p>
+            <span class="badge bg-purple-100 text-purple-800">Enrollment</span>
+          </div>
+
+          <div class="activity-item">
+            <div class="flex justify-between">
+              <h3 class="font-medium">Monthly Report Generated</h3>
+              <span class="text-xs text-gray-500">May 10, 2025</span>
+            </div>
+            <p class="text-sm text-gray-600">Generated SF4 for April 2025</p>
+            <span class="badge bg-yellow-100 text-yellow-800">Report</span>
+          </div>
+        </div>
+
+        <div class="mt-4 text-center">
+          <button class="text-primary text-sm hover:underline">
+            View All Activities
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upcoming Events Section -->
+  <div class="dashboard-section mt-6">
+    <h2 class="section-title mb-4">Upcoming School Events</h2>
+    <div class="events-list">
+      <div class="event-item">
+        <div class="event-date">
+          <div class="month">MAY</div>
+          <div class="day">25</div>
+        </div>
+        <div class="event-details">
+          <h3 class="event-title">Parent-Teacher Conference</h3>
+          <p class="event-description">Discuss student progress with parents</p>
+          <p class="event-time">1:00 PM - 5:00 PM</p>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date">
+          <div class="month">JUN</div>
+          <div class="day">10</div>
+        </div>
+        <div class="event-details">
+          <h3 class="event-title">School Year End Ceremony</h3>
+          <p class="event-description">
+            Year-end recognition and closing ceremony
+          </p>
+          <p class="event-time">9:00 AM - 11:00 AM</p>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date">
+          <div class="month">JUN</div>
+          <div class="day">15</div>
+        </div>
+        <div class="event-details">
+          <h3 class="event-title">Report Card Distribution</h3>
+          <p class="event-description">Final grades and report cards</p>
+          <p class="event-time">8:00 AM - 12:00 PM</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
