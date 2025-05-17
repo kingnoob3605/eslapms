@@ -1,6 +1,6 @@
 .login-container {
-  max-width: 400px;
   width: 100%;
+  padding: 1.5rem;
   margin: 0 auto;
 }
 
@@ -88,7 +88,8 @@
   margin-top: 0.75rem;
 }
 
-.btn-sign-in {
+.btn-sign-in,
+.btn-sign-up {
   width: 100%;
   padding: 0.75rem 1.5rem;
   background-color: #445566;
@@ -104,13 +105,13 @@
   justify-content: center;
 }
 
-.btn-sign-in:hover:not(:disabled) {
-  background-color: #394857;
-}
-
-.btn-sign-in:disabled {
-  background-color: #999;
-  cursor: not-allowed;
+.spinner {
+  animation: rotate 2s linear infinite;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .spinner {

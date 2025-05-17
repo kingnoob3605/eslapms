@@ -1,7 +1,8 @@
 .sidebar-container {
-  position: absolute;
-  height: 100%;
-  overflow: hidden;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
   background-color: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(4px);
   transition: all 0.3s ease-in-out;
@@ -15,6 +16,7 @@
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease-in-out;
+  padding-top: 1rem;
 }
 
 .sidebar-expanded {
@@ -37,50 +39,25 @@
 /* Make the sidebar static on larger screens */
 @media (min-width: 768px) {
   .sidebar-container {
-    position: relative;
+    position: sticky;
+    top: 0;
   }
 }
-.students-container {
-  padding: 1rem;
+
+/* Custom scrollbar for sidebar */
+.sidebar-container::-webkit-scrollbar {
+  width: 4px;
 }
 
-.student-card {
-  transition: all 0.2s ease-in-out;
-  border: 1px solid #f1f1f1;
+.sidebar-container::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.student-card:hover {
-  transform: translateY(-3px);
-}
-
-.student-avatar {
-  background-color: var(--color-primary, #2c3e50);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #ccc;
+.sidebar-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #999;
-}
-
-/* Responsive tables */
-@media (max-width: 768px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
+.sidebar-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }

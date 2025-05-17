@@ -9,7 +9,7 @@
 
 /* Background image */
 .bg-image {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -23,7 +23,7 @@
 
 /* Semi-transparent overlay */
 .bg-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -34,7 +34,7 @@
 
 /* Wave decoration at the bottom */
 .wave-decoration {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -51,6 +51,8 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  height: 100vh;
+  scroll-behavior: smooth;
 }
 
 /* White transparent container */
@@ -60,22 +62,31 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 1.5rem;
-  margin: 1rem auto;
+  margin: 0;
   flex: 1;
   overflow: auto;
-  max-width: 1400px;
   width: 100%;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   transition: all 0.3s ease;
 }
 
-/* Sidebar content styling */
-.sidebar-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.5rem;
+/* Custom scrollbar for main content */
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 
 /* Responsive adjustments */
@@ -86,6 +97,7 @@
 
   .main-content {
     padding: 1rem;
+    height: calc(100vh - 56px); /* Adjust for header height */
   }
 
   .white-container {

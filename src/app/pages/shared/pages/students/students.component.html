@@ -50,6 +50,15 @@
           Section {{ section }}
         </option>
       </select>
+
+      <!-- Sort button -->
+      <button
+        class="focus:border-primary flex items-center gap-1 rounded-lg border border-gray-300 bg-gray-50 p-2 focus:outline-none"
+        (click)="toggleSortDirection()"
+      >
+        <ng-icon [svg]="sortIcon" size="20"></ng-icon>
+        Sort {{ sortDirection === "asc" ? "(A-Z)" : "(Z-A)" }}
+      </button>
     </div>
 
     <!-- Action buttons -->
@@ -121,10 +130,10 @@
   <!-- Students Grid View -->
   <div
     *ngIf="viewMode === 'grid'"
-    class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    class="student-container grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
     <div
-      *ngFor="let student of filteredStudents"
+      *ngFor="let student of displayedStudents"
       class="student-card rounded-lg bg-white p-4 shadow-sm transition-all hover:shadow-md"
     >
       <div class="mb-3 flex justify-between">
@@ -194,7 +203,7 @@
   <!-- Students List View -->
   <div
     *ngIf="viewMode === 'list'"
-    class="overflow-x-auto rounded-lg bg-white shadow-sm"
+    class="student-container overflow-x-auto rounded-lg bg-white shadow-sm"
   >
     <table class="min-w-full table-auto">
       <thead class="bg-gray-50">
@@ -232,7 +241,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200 bg-white">
-        <tr *ngFor="let student of filteredStudents" class="hover:bg-gray-50">
+        <tr *ngFor="let student of displayedStudents" class="hover:bg-gray-50">
           <td class="px-4 py-3 whitespace-nowrap">
             <div class="flex items-center">
               <div
@@ -319,12 +328,16 @@
   <!-- Pagination -->
   <div class="mt-4 flex items-center justify-between">
     <div class="text-sm text-gray-500">
-      Showing <span class="font-medium">{{ filteredStudents.length }}</span> of
-      <span class="font-medium">{{ students.length }}</span> students
+      Showing <span class="font-medium">{{ displayedStudents.length }}</span> of
+      <span class="font-medium">{{ filteredStudents.length }}</span> students
+      (Page <span class="font-medium">{{ currentPage }}</span> of
+      <span class="font-medium">{{ totalPages }}</span
+      >)
     </div>
     <div class="flex gap-2">
       <button
         [disabled]="currentPage === 1"
+        (click)="goToPreviousPage()"
         class="rounded-md border p-2 transition-colors hover:bg-gray-50 disabled:opacity-50"
       >
         <ng-icon [svg]="prevIcon" size="20"></ng-icon>
@@ -334,6 +347,7 @@
       </button>
       <button
         [disabled]="isLastPage()"
+        (click)="goToNextPage()"
         class="rounded-md border p-2 transition-colors hover:bg-gray-50 disabled:opacity-50"
       >
         <ng-icon [svg]="nextIcon" size="20"></ng-icon>

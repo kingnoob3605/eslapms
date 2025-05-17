@@ -13,6 +13,7 @@ import {
   matArrowForwardIosRound,
   matEventNoteRound,
   matHealthAndSafetyRound,
+  matSortRound,
 } from '@ng-icons/material-icons/round';
 
 interface Student {
@@ -50,10 +51,12 @@ export class StudentsComponent implements OnInit {
   nextIcon = matArrowForwardIosRound;
   attendanceIcon = matEventNoteRound;
   healthIcon = matHealthAndSafetyRound;
+  sortIcon = matSortRound;
 
   // Students data
   students: Student[] = [];
   filteredStudents: Student[] = [];
+  displayedStudents: Student[] = [];
 
   // Filters
   searchTerm: string = '';
@@ -66,6 +69,10 @@ export class StudentsComponent implements OnInit {
   // Pagination
   currentPage: number = 1;
   itemsPerPage: number = 12;
+  totalPages: number = 1;
+
+  // Sorting
+  sortDirection: 'asc' | 'desc' = 'asc';
 
   // Filter options
   grades: string[] = ['1', '2', '3', '4', '5', '6'];
@@ -76,7 +83,9 @@ export class StudentsComponent implements OnInit {
   ngOnInit(): void {
     // Generate mock student data
     this.generateMockData();
+    this.sortStudents();
     this.applyFilters();
+    this.updateDisplayedStudents();
   }
 
   // Generate mock data for demonstration
@@ -94,6 +103,18 @@ export class StudentsComponent implements OnInit {
       'Emma',
       'Juan',
       'Sarah',
+      'Alice',
+      'Bob',
+      'Charlie',
+      'Diana',
+      'Edward',
+      'Fiona',
+      'George',
+      'Hannah',
+      'Ivan',
+      'Julia',
+      'Kevin',
+      'Laura',
     ];
     const lastNames = [
       'Garcia',
@@ -108,6 +129,18 @@ export class StudentsComponent implements OnInit {
       'Reyes',
       'Torres',
       'Gonzalez',
+      'Anderson',
+      'Baker',
+      'Clark',
+      'Davis',
+      'Evans',
+      'Fisher',
+      'Green',
+      'Harris',
+      'Jackson',
+      'King',
+      'Lopez',
+      'Miller',
     ];
 
     for (let i = 1; i <= 50; i++) {
@@ -157,6 +190,20 @@ export class StudentsComponent implements OnInit {
     return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
   }
 
+  // Sort students alphabetically by first name
+  sortStudents(): void {
+    this.students.sort((a, b) => {
+      const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+      const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+
+      if (this.sortDirection === 'asc') {
+        return nameA.localeCompare(nameB);
+      } else {
+        return nameB.localeCompare(nameA);
+      }
+    });
+  }
+
   // Apply filters to the student list
   applyFilters(): void {
     this.filteredStudents = this.students.filter((student) => {
@@ -177,11 +224,51 @@ export class StudentsComponent implements OnInit {
 
       return (nameMatches || lrnMatches) && gradeMatches && sectionMatches;
     });
+
+    // Update total pages
+    this.totalPages = Math.ceil(
+      this.filteredStudents.length / this.itemsPerPage,
+    );
+
+    // Reset to first page when filters change
+    this.currentPage = 1;
+
+    // Update displayed students
+    this.updateDisplayedStudents();
+  }
+
+  // Toggle sort direction
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortStudents();
+    this.applyFilters();
+  }
+
+  // Update the list of displayed students based on pagination
+  updateDisplayedStudents(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedStudents = this.filteredStudents.slice(startIndex, endIndex);
   }
 
   // Handle search input
   onSearch(): void {
     this.applyFilters();
+  }
+
+  // Navigation methods
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updateDisplayedStudents();
+    }
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updateDisplayedStudents();
+    }
   }
 
   // Get initials from name
@@ -209,10 +296,7 @@ export class StudentsComponent implements OnInit {
 
   // Check if current page is the last page
   isLastPage(): boolean {
-    return (
-      this.currentPage >=
-      Math.ceil(this.filteredStudents.length / this.itemsPerPage)
-    );
+    return this.currentPage >= this.totalPages;
   }
 
   // Open modal to add new student

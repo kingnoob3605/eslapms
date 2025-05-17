@@ -1,3 +1,4 @@
+/* src/app/pages/auth/auth.component.css */
 .auth-container {
   display: flex;
   align-items: center;
@@ -12,15 +13,15 @@
 
 .auth-card {
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px; /* Increased radius for more appeal */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
   overflow: hidden;
   animation: fadeIn 0.5s ease-out;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.08); /* More subtle border */
 }
 
 .auth-content {
@@ -28,22 +29,15 @@
   flex: 1;
 }
 
-.register-container,
-.login-container {
-  max-width: 100%; /* Change from fixed width to 100% */
-  width: 100%;
-  margin: 0 auto;
-}
-
 .auth-footer {
   display: flex;
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(0, 0, 0, 0.08); /* Match card border */
 }
 
 .tab-button {
   flex: 1;
   padding: 1rem;
-  background-color: #445566;
+  background-color: #4a90e2; /* Match the blue accent color */
   border: none;
   color: white;
   font-weight: 600;
@@ -56,19 +50,19 @@
 }
 
 .tab-button:first-child {
-  border-radius: 0 0 0 8px;
+  border-radius: 0 0 0 12px; /* Match card radius */
 }
 
 .tab-button:last-child {
-  border-radius: 0 0 8px 0;
+  border-radius: 0 0 12px 0; /* Match card radius */
 }
 
 .tab-button:hover {
-  background-color: #394857;
+  background-color: #3a80d2; /* Slightly darker on hover */
 }
 
 .tab-button.active {
-  background-color: var(--color-primary, #2c3e50);
+  background-color: #2c3e50; /* Darker color for active tab */
 }
 
 @keyframes fadeIn {
