@@ -3,23 +3,43 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   border-radius: 0.75rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  scrollbar-width: thin;
+}
+
+/* Custom scrollbar styling */
+.registration-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.registration-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.registration-container::-webkit-scrollbar-thumb {
+  background: #2c3e50;
+  border-radius: 10px;
 }
 
 .form-title {
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: #1a1a1a;
   margin-bottom: 0.5rem;
   text-align: center;
 }
 
 .form-subtitle {
-  color: #666;
+  color: #333;
   margin-bottom: 2rem;
   text-align: center;
+  font-size: 1.1rem;
 }
 
 .registration-form {
@@ -29,30 +49,36 @@
 }
 
 .form-section {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 0.5rem;
   padding: 1.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .form-section:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Hide Senior High School section */
+.form-section[formGroupName="seniorHighSchool"] {
+  display: none;
+}
+
 .section-header {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: #1a1a1a;
   margin-bottom: 1.25rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid #2c3e50;
 }
 
 .subsection-header {
   font-size: 1.1rem;
   font-weight: 500;
-  color: #2c3e50;
+  color: #1a1a1a;
   margin: 1.5rem 0 1rem;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid #e0e0e0;
@@ -63,6 +89,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1rem;
+  align-items: flex-start;
 }
 
 .form-group {
@@ -72,26 +99,55 @@
   flex-direction: column;
 }
 
+/* Fix for grade level alignment */
+div[formGroupName="graded"] .form-row {
+  align-items: center;
+}
+
+.form-group.checkbox-group {
+  min-height: 38px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .form-group label {
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: #444;
-  font-size: 0.9rem;
+  color: #333;
+  font-size: 0.95rem;
 }
 
 .form-control {
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 0.25rem;
   background-color: white;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
   font-size: 0.95rem;
+}
+
+/* Improve placeholder text appearance */
+.form-control::placeholder {
+  color: rgba(0, 0, 0, 0.35);
+  font-style: italic;
 }
 
 .form-control:focus {
   border-color: #2c3e50;
   outline: none;
   box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.2);
+}
+
+/* Grade level checkbox and select alignment fix */
+div[formGroupName="graded"] .form-group.checkbox-group {
+  flex: 0 0 auto;
+  min-width: 120px;
+  margin-right: 1rem;
+}
+
+div[formGroupName="nonGraded"] .form-group.checkbox-group {
+  margin-top: 0.5rem;
 }
 
 .checkbox-group {
@@ -107,12 +163,15 @@
   gap: 0.5rem;
   cursor: pointer;
   margin-bottom: 0;
+  color: #333;
 }
 
 .checkbox-group input[type="checkbox"] {
   width: 18px;
   height: 18px;
   margin: 0;
+  cursor: pointer;
+  accent-color: #2c3e50;
 }
 
 .checkbox-list {
@@ -123,13 +182,15 @@
 
 .required {
   color: #e74c3c;
+  font-weight: bold;
 }
 
 .disclaimer {
-  background-color: rgba(236, 240, 241, 0.5);
+  background-color: rgba(236, 240, 241, 0.8);
   padding: 1rem;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
+  border-left: 4px solid #2c3e50;
 }
 
 .form-actions {
@@ -137,6 +198,11 @@
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 2rem;
+  position: sticky;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
 }
 
 .btn-primary,
@@ -171,6 +237,7 @@
 .btn-secondary {
   background-color: #ecf0f1;
   color: #2c3e50;
+  border: 1px solid #ddd;
 }
 
 .btn-secondary:hover {
@@ -178,9 +245,18 @@
   transform: translateY(-2px);
 }
 
+/* Make form adapt better to different screen sizes */
+@media (max-width: 992px) {
+  .registration-container {
+    height: 90vh;
+    padding: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .registration-container {
     padding: 1rem;
+    height: calc(100vh - 80px); /* Account for header space */
   }
 
   .form-section {
@@ -207,5 +283,9 @@
   .btn-primary,
   .btn-secondary {
     width: 100%;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
   }
 }

@@ -17,7 +17,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 
 @Component({
   selector: 'app-login-form',
-  imports: [ReactiveFormsModule, CommonModule, InputComponent, ButtonComponent],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css',
 })

@@ -1,12 +1,26 @@
-<div class="rounded-lg bg-white/80 p-4 backdrop-blur-sm">
-  <p class="text-lg font-bold">Hello, Welcome!</p>
-  <div class="flex gap-2">
-    <app-button routerLink="login" routerLinkActive="font-bold"
-      >Login</app-button
-    >
-    <app-button routerLink="register" routerLinkActive="font-bold"
-      >Register</app-button
-    >
+<div class="auth-container">
+  <div class="auth-card">
+    <!-- The auth content (login/register form) comes first -->
+    <div class="auth-content">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- The buttons moved to the bottom -->
+    <div class="auth-footer">
+      <button
+        class="tab-button"
+        [class.active]="router.url.includes('/login')"
+        routerLink="login"
+      >
+        Login
+      </button>
+      <button
+        class="tab-button"
+        [class.active]="router.url.includes('/register')"
+        routerLink="register"
+      >
+        Register
+      </button>
+    </div>
   </div>
-  <router-outlet />
 </div>
