@@ -19,13 +19,7 @@ import { AuthSuccess } from '../../../../store/auth/auth.state';
 
 @Component({
   selector: 'app-register-form',
-  imports: [
-    InputComponent,
-    ButtonComponent,
-    ReactiveFormsModule,
-    NgFor,
-    CommonModule,
-  ],
+  imports: [ReactiveFormsModule, NgFor, CommonModule],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.css',
 })

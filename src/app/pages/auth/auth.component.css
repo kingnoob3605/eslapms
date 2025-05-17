@@ -28,6 +28,13 @@
   flex: 1;
 }
 
+.register-container,
+.login-container {
+  max-width: 100%; /* Change from fixed width to 100% */
+  width: 100%;
+  margin: 0 auto;
+}
+
 .auth-footer {
   display: flex;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
