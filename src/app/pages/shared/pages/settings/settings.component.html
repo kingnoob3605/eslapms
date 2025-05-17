@@ -1,1 +1,418 @@
-<p>settings works!</p>
+<div class="settings-container">
+  <h1 class="mb-6 text-2xl font-bold text-gray-800">Account Settings</h1>
+
+  <div class="settings-layout">
+    <!-- Settings Navigation Sidebar -->
+    <div class="settings-nav">
+      <ul>
+        <li>
+          <button
+            [ngClass]="{ active: activeTab === 'profile' }"
+            (click)="setActiveTab('profile')"
+            class="nav-button"
+          >
+            <ng-icon [svg]="personIcon" size="20"></ng-icon>
+            <span>Profile Information</span>
+          </button>
+        </li>
+        <li>
+          <button
+            [ngClass]="{ active: activeTab === 'password' }"
+            (click)="setActiveTab('password')"
+            class="nav-button"
+          >
+            <ng-icon [svg]="lockIcon" size="20"></ng-icon>
+            <span>Change Password</span>
+          </button>
+        </li>
+        <li>
+          <button
+            [ngClass]="{ active: activeTab === 'preferences' }"
+            (click)="setActiveTab('preferences')"
+            class="nav-button"
+          >
+            <ng-icon [svg]="themeIcon" size="20"></ng-icon>
+            <span>Visual Preferences</span>
+          </button>
+        </li>
+        <li>
+          <button
+            [ngClass]="{ active: activeTab === 'notifications' }"
+            (click)="setActiveTab('notifications')"
+            class="nav-button"
+          >
+            <ng-icon [svg]="notificationIcon" size="20"></ng-icon>
+            <span>Notifications</span>
+          </button>
+        </li>
+        <li>
+          <button
+            [ngClass]="{ active: activeTab === 'system' }"
+            (click)="setActiveTab('system')"
+            class="nav-button"
+          >
+            <ng-icon [svg]="schoolIcon" size="20"></ng-icon>
+            <span>System Settings</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Settings Content Area -->
+    <div class="settings-content">
+      <!-- Profile Information Tab -->
+      <div *ngIf="activeTab === 'profile'" class="settings-panel">
+        <div class="panel-header">
+          <h2 class="text-xl font-semibold">Profile Information</h2>
+          <p class="text-gray-600">Update your personal information</p>
+        </div>
+
+        <form
+          [formGroup]="profileForm"
+          (ngSubmit)="saveProfile()"
+          class="form-grid"
+        >
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-control"
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              formControlName="phone"
+              class="form-control"
+              placeholder="Enter your phone number"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="position">Position/Role</label>
+            <input
+              type="text"
+              id="position"
+              formControlName="position"
+              class="form-control"
+              placeholder="Your position or role"
+            />
+          </div>
+
+          <div class="form-group col-span-2">
+            <label for="bio">Bio/About Me</label>
+            <textarea
+              id="bio"
+              formControlName="bio"
+              class="form-control h-24"
+              placeholder="Tell us about yourself"
+            ></textarea>
+          </div>
+
+          <div class="col-span-2 mt-4">
+            <button type="submit" class="save-button">
+              <ng-icon [svg]="saveIcon" size="20"></ng-icon>
+              <span>Save Profile</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Password Tab -->
+      <div *ngIf="activeTab === 'password'" class="settings-panel">
+        <div class="panel-header">
+          <h2 class="text-xl font-semibold">Change Password</h2>
+          <p class="text-gray-600">Update your account password</p>
+        </div>
+
+        <form
+          [formGroup]="passwordForm"
+          (ngSubmit)="savePassword()"
+          class="form-grid"
+        >
+          <div class="form-group col-span-2">
+            <label for="currentPassword">Current Password</label>
+            <input
+              type="password"
+              id="currentPassword"
+              formControlName="currentPassword"
+              class="form-control"
+              placeholder="Enter your current password"
+            />
+          </div>
+
+          <div class="form-group col-span-2">
+            <label for="newPassword">New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              formControlName="newPassword"
+              class="form-control"
+              placeholder="Enter your new password"
+            />
+            <p class="mt-1 text-xs text-gray-500">
+              Password must be at least 8 characters long
+            </p>
+          </div>
+
+          <div class="form-group col-span-2">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="form-control"
+              placeholder="Confirm your new password"
+            />
+          </div>
+
+          <div class="col-span-2 mt-4">
+            <button type="submit" class="save-button">
+              <ng-icon [svg]="saveIcon" size="20"></ng-icon>
+              <span>Change Password</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Preferences Tab -->
+      <div *ngIf="activeTab === 'preferences'" class="settings-panel">
+        <div class="panel-header">
+          <h2 class="text-xl font-semibold">Visual Preferences</h2>
+          <p class="text-gray-600">Customize your application experience</p>
+        </div>
+
+        <form
+          [formGroup]="preferencesForm"
+          (ngSubmit)="savePreferences()"
+          class="form-grid"
+        >
+          <div class="form-group col-span-2">
+            <label for="theme">Theme</label>
+            <select id="theme" formControlName="theme" class="form-control">
+              <option
+                *ngFor="let option of themeOptions"
+                [value]="option.value"
+              >
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group col-span-2">
+            <label for="language">Language</label>
+            <select
+              id="language"
+              formControlName="language"
+              class="form-control"
+            >
+              <option
+                *ngFor="let option of languageOptions"
+                [value]="option.value"
+              >
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group col-span-2">
+            <label for="fontSize">Font Size</label>
+            <select
+              id="fontSize"
+              formControlName="fontSize"
+              class="form-control"
+            >
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+            </select>
+          </div>
+
+          <div class="form-group checkbox-group col-span-2">
+            <label>
+              <input type="checkbox" formControlName="compactView" />
+              <span>Use compact view</span>
+            </label>
+            <p class="mt-1 text-xs text-gray-500">
+              Show more information in less space
+            </p>
+          </div>
+
+          <div class="col-span-2 mt-4">
+            <button type="submit" class="save-button">
+              <ng-icon [svg]="saveIcon" size="20"></ng-icon>
+              <span>Save Preferences</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Notifications Tab -->
+      <div *ngIf="activeTab === 'notifications'" class="settings-panel">
+        <div class="panel-header">
+          <h2 class="text-xl font-semibold">Notification Settings</h2>
+          <p class="text-gray-600">Manage how you receive notifications</p>
+        </div>
+
+        <form
+          [formGroup]="notificationsForm"
+          (ngSubmit)="saveNotifications()"
+          class="form-grid"
+        >
+          <div class="form-group checkbox-group col-span-2">
+            <label>
+              <input type="checkbox" formControlName="emailNotifications" />
+              <span>Email Notifications</span>
+            </label>
+            <p class="mt-1 text-xs text-gray-500">
+              Receive notifications via email
+            </p>
+          </div>
+
+          <div class="form-group checkbox-group col-span-2">
+            <label>
+              <input type="checkbox" formControlName="pushNotifications" />
+              <span>Push Notifications</span>
+            </label>
+            <p class="mt-1 text-xs text-gray-500">
+              Receive notifications in browser
+            </p>
+          </div>
+
+          <div class="col-span-2 mt-3 mb-3">
+            <h3 class="font-medium text-gray-700">Notification Types</h3>
+          </div>
+
+          <div class="form-group checkbox-group col-span-2">
+            <label>
+              <input type="checkbox" formControlName="attendanceAlerts" />
+              <span>Attendance Alerts</span>
+            </label>
+          </div>
+
+          <div class="form-group checkbox-group col-span-2">
+            <label>
+              <input type="checkbox" formControlName="systemUpdates" />
+              <span>System Updates</span>
+            </label>
+          </div>
+
+          <div class="form-group checkbox-group col-span-2">
+            <label>
+              <input type="checkbox" formControlName="parentMessages" />
+              <span>Parent Messages</span>
+            </label>
+          </div>
+
+          <div class="col-span-2 mt-4">
+            <button type="submit" class="save-button">
+              <ng-icon [svg]="saveIcon" size="20"></ng-icon>
+              <span>Save Notification Settings</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- System Settings Tab -->
+      <div *ngIf="activeTab === 'system'" class="settings-panel">
+        <div class="panel-header">
+          <h2 class="text-xl font-semibold">System Settings</h2>
+          <p class="text-gray-600">Manage system configuration</p>
+        </div>
+
+        <form
+          [formGroup]="systemForm"
+          (ngSubmit)="saveSystemSettings()"
+          class="form-grid"
+        >
+          <div class="form-group col-span-2">
+            <label for="currentSchoolYear">Current School Year</label>
+            <input
+              type="text"
+              id="currentSchoolYear"
+              formControlName="currentSchoolYear"
+              class="form-control"
+              placeholder="e.g. 2025-2026"
+            />
+          </div>
+
+          <div class="form-group col-span-2">
+            <label for="sessionTimeout">Session Timeout</label>
+            <select
+              id="sessionTimeout"
+              formControlName="sessionTimeout"
+              class="form-control"
+            >
+              <option
+                *ngFor="let option of timeoutOptions"
+                [value]="option.value"
+              >
+                {{ option.label }}
+              </option>
+            </select>
+            <p class="mt-1 text-xs text-gray-500">
+              How long before automatically logging out due to inactivity
+            </p>
+          </div>
+
+          <div class="form-group checkbox-group col-span-2">
+            <label>
+              <input type="checkbox" formControlName="dataBackup" />
+              <span>Enable Automatic Data Backup</span>
+            </label>
+          </div>
+
+          <div class="form-group checkbox-group col-span-2">
+            <label>
+              <input type="checkbox" formControlName="showHelp" />
+              <span>Show Help Tips</span>
+            </label>
+            <p class="mt-1 text-xs text-gray-500">
+              Display helpful tooltips throughout the application
+            </p>
+          </div>
+
+          <div class="form-group col-span-2">
+            <div class="system-info-box">
+              <div class="mb-2 flex items-center gap-2">
+                <ng-icon
+                  [svg]="infoIcon"
+                  size="20"
+                  class="text-blue-600"
+                ></ng-icon>
+                <h3 class="font-medium">System Information</h3>
+              </div>
+              <p class="text-sm text-gray-600">Version: 1.0.0</p>
+              <p class="text-sm text-gray-600">Last Updated: May 15, 2025</p>
+              <p class="text-sm text-gray-600">Database: Up to date</p>
+            </div>
+          </div>
+
+          <div class="col-span-2 mt-4">
+            <button type="submit" class="save-button">
+              <ng-icon [svg]="saveIcon" size="20"></ng-icon>
+              <span>Save System Settings</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

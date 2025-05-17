@@ -1,0 +1,175 @@
+.settings-container {
+  padding: 1rem;
+}
+
+.settings-layout {
+  display: flex;
+  gap: 1.5rem;
+  min-height: 600px;
+}
+
+/* Settings navigation sidebar */
+.settings-nav {
+  width: 250px;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.settings-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.nav-button.active {
+  background-color: rgba(52, 152, 219, 0.15);
+  color: #2c3e50;
+  font-weight: 500;
+  border-left: 3px solid #3498db;
+}
+
+/* Settings content area */
+.settings-content {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.settings-panel {
+  padding: 1.5rem;
+}
+
+.panel-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.col-span-2 {
+  grid-column: span 2;
+}
+
+label {
+  font-weight: 500;
+  color: #333;
+}
+
+.form-control {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  background-color: white;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #3498db;
+}
+
+/* Save button */
+.save-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #3498db;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* System info box */
+.system-info-box {
+  background-color: rgba(52, 152, 219, 0.1);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid #3498db;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .settings-layout {
+    flex-direction: column;
+  }
+
+  .settings-nav {
+    width: 100%;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .col-span-2 {
+    grid-column: span 1;
+  }
+}

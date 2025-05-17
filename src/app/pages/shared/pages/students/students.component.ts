@@ -60,7 +60,7 @@ export class StudentsComponent implements OnInit {
 
   // Filters
   searchTerm: string = '';
-  gradeFilter: string = '';
+  gradeFilter: string = '1';
   sectionFilter: string = '';
 
   // View mode
@@ -147,7 +147,7 @@ export class StudentsComponent implements OnInit {
       const firstName =
         firstNames[Math.floor(Math.random() * firstNames.length)];
       const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-      const grade = this.grades[Math.floor(Math.random() * this.grades.length)];
+      const grade = '1';
       const section =
         this.sections[Math.floor(Math.random() * this.sections.length)];
       const gender = Math.random() > 0.5 ? 'Male' : 'Female';
