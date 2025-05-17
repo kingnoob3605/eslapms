@@ -38,7 +38,7 @@ export class AttendanceComponent implements OnInit {
   classes: Class[] = [
     {
       id: 1,
-      name: 'Grade 3-A',
+      name: 'Grade 1-A',
       students: [
         { id: 1, name: 'Juan Dela Cruz', status: '', notes: '' },
         { id: 2, name: 'Maria Santos', status: '', notes: '' },
@@ -54,7 +54,7 @@ export class AttendanceComponent implements OnInit {
     },
     {
       id: 2,
-      name: 'Grade 3-B',
+      name: 'Grade 1-B',
       students: [
         { id: 11, name: 'Lucas Tan', status: '', notes: '' },
         { id: 12, name: 'Sophia Lim', status: '', notes: '' },
