@@ -10,6 +10,7 @@ import {
   matCalendarMonthRound,
   matNotificationsRound,
 } from '@ng-icons/material-icons/round';
+import { Router } from '@angular/router';
 
 // This interface will define our statistics data structure
 interface StatCard {
@@ -34,7 +35,7 @@ interface Activity {
   standalone: true,
   imports: [CommonModule, NgIcon],
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.css',
+  styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
   // Icons for use in the template
@@ -116,7 +117,7 @@ export class AdminDashboardComponent implements OnInit {
   totalAbsent = 25;
   attendanceRate = 95.2;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     // Any initialization code would go here
@@ -126,7 +127,6 @@ export class AdminDashboardComponent implements OnInit {
   // Method to handle card click events
   navigateTo(route: string): void {
     console.log(`Navigating to ${route}`);
-    // This would typically use the Router service to navigate
-    // this.router.navigate([route]);
+    this.router.navigate([route]);
   }
 }

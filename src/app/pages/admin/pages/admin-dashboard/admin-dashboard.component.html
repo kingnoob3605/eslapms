@@ -7,23 +7,21 @@
 
   <!-- Statistics Cards -->
   <div class="stats-container">
-    @for (stat of stats; track stat.title) {
-      <div [ngClass]="['stat-card', stat.bgColor]">
-        <div class="stat-icon-container">
-          <ng-icon
-            [svg]="stat.icon"
-            size="24"
-            [ngClass]="stat.textColor"
-          ></ng-icon>
-        </div>
-        <div class="stat-text">
-          <h3 [ngClass]="stat.textColor" class="text-xl font-bold">
-            {{ stat.count }}
-          </h3>
-          <p class="text-sm text-gray-700">{{ stat.title }}</p>
-        </div>
+    <div *ngFor="let stat of stats" [ngClass]="['stat-card', stat.bgColor]">
+      <div class="stat-icon-container">
+        <ng-icon
+          [svg]="stat.icon"
+          size="24"
+          [ngClass]="stat.textColor"
+        ></ng-icon>
       </div>
-    }
+      <div class="stat-text">
+        <h3 [ngClass]="stat.textColor" class="text-xl font-bold">
+          {{ stat.count }}
+        </h3>
+        <p class="text-sm text-gray-700">{{ stat.title }}</p>
+      </div>
+    </div>
   </div>
 
   <!-- Main Dashboard Content -->
@@ -134,35 +132,26 @@
         </div>
 
         <div class="activities-list">
-          @for (activity of recentActivities; track activity.id) {
-            <div class="activity-item">
-              <div class="flex justify-between">
-                <h3 class="font-medium">{{ activity.title }}</h3>
-                <span class="text-xs text-gray-500">{{ activity.time }}</span>
-              </div>
-              <p class="text-sm text-gray-600">{{ activity.description }}</p>
-
-              <!-- Activity type badge -->
-              @switch (activity.type) {
-                @case ("enrollment") {
-                  <span class="badge bg-blue-100 text-blue-800"
-                    >Enrollment</span
-                  >
-                }
-                @case ("attendance") {
-                  <span class="badge bg-purple-100 text-purple-800"
-                    >Attendance</span
-                  >
-                }
-                @case ("health") {
-                  <span class="badge bg-green-100 text-green-800">Health</span>
-                }
-                @case ("system") {
-                  <span class="badge bg-gray-100 text-gray-800">System</span>
-                }
-              }
+          <div *ngFor="let activity of recentActivities" class="activity-item">
+            <div class="flex justify-between">
+              <h3 class="font-medium">{{ activity.title }}</h3>
+              <span class="text-xs text-gray-500">{{ activity.time }}</span>
             </div>
-          }
+            <p class="text-sm text-gray-600">{{ activity.description }}</p>
+
+            <!-- Activity type badge -->
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-blue-100 text-blue-800': activity.type === 'enrollment',
+                'bg-purple-100 text-purple-800': activity.type === 'attendance',
+                'bg-green-100 text-green-800': activity.type === 'health',
+                'bg-gray-100 text-gray-800': activity.type === 'system',
+              }"
+            >
+              {{ activity.type | titlecase }}
+            </span>
+          </div>
         </div>
 
         <div class="mt-4 text-center">
