@@ -51,14 +51,14 @@ export class AdminDashboardComponent implements OnInit {
   stats: StatCard[] = [
     {
       title: 'Total Students',
-      count: 523,
+      count: 249,
       icon: this.studentIcon,
       bgColor: 'bg-blue-100',
       textColor: 'text-blue-800',
     },
     {
       title: 'Total Teachers',
-      count: 32,
+      count: 15,
       icon: this.teachersIcon,
       bgColor: 'bg-green-100',
       textColor: 'text-green-800',
